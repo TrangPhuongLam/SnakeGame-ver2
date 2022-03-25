@@ -1,5 +1,7 @@
 package model;
 
-public class Energy {
+import abstractSnakeGame.Food;
+
+public class Energy extends Food{
 
 }
