@@ -3,6 +3,7 @@ package controller;
 import java.awt.Color;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
@@ -12,6 +13,7 @@ import model.Apple;
 import model.GameState;
 import model.Mushroom;
 import model.Snake;
+import panel.PanelMap_1;
 
 
 public class ScreenGameController {
@@ -31,19 +33,15 @@ public class ScreenGameController {
 		super();
 //		init();
 		this.screenGame = screenGame;
-//		snake = new Snake();
+		
+		snake = new Snake(screenGame.width, screenGame.height);
 //		state = new GameState();
 //		score = new Score();
 
 //		apple = new Apple();
 //		mushroom = new Mushroom();
 		
-		// board = new Board(20, 20);
 
-		frameGame = new int[20][20]; // do rong cua bang la 20
-
-		frameGame[5][6] = 2;
-		frameGame[14][10] = -2;
 		
 	}
 	
@@ -58,23 +56,23 @@ public class ScreenGameController {
 
 	//Paint character: snake, food, barrier
 	public void paint(Graphics g) {
-//		g.drawImage(new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\bg.png").getImage(), 0, 0, null);
-//		g.fillRect(0, 0, width, height);		
 //		apple.paint(g);
 //		mushroom.paint(g);
-//		snake.paint(g);
-		if (!state.getPlaying())
-			if (!state.getStartGame()) {
-				g.setColor(Color.red);
-				g.setFont(g.getFont().deriveFont(18.0f));
-				g.drawString("PRESS SPACE TO PLAYING GAME", 60, 150);
-			}
-		if (state.getgameOver()) {
-			g.setColor(Color.red);
-			g.setFont(g.getFont().deriveFont(18.0f));
-			g.drawString("OVER GAME!!!", 120, 150);
-			state.setStartGame(true);
-		}
+		
+//		if (!state.getPlaying())
+//			if (!state.getStartGame()) {
+//				g.setColor(Color.red);
+//				g.setFont(g.getFont().deriveFont(18.0f));
+//				g.drawString("PRESS SPACE TO PLAYING GAME", 60, 150);
+//			}
+//		if (state.getgameOver()) {
+//			g.setColor(Color.red);
+//			g.setFont(g.getFont().deriveFont(18.0f));
+//			g.drawString("OVER GAME!!!", 120, 150);
+//			state.setStartGame(true);
+//		}
+		
+		snake.paintSnake(g);
 	}
 
 	public void state() {
@@ -99,6 +97,17 @@ public class ScreenGameController {
 //		}
 	}
 
+	public void startGame() {
+		if(snake.running) {
+			snake.moving();
+		}else {
+		}
+		
+	}
 	
+	public void handlerKeyPress(KeyEvent e) {
+		Snake.HandlerKeyPress handlerKeyPress = snake.new HandlerKeyPress(e);
+		System.out.println("snake key press");
+	}
 	
 }

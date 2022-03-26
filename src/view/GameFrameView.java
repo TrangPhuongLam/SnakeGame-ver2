@@ -21,13 +21,12 @@ public class GameFrameView extends JFrame implements Runnable{
 	Thread thread;
 	PanelNavigationGameFrame panelNavigationGameFrame;
 	GameFrameController gameFrameController;
-	public ScreenGame screenGame;
+	public ScreenGame screenGame = new ScreenGame();
 	static final int WIDTH = 413, HEIGHT = 472;
 
 	public GameFrameView(int width, int height) {
 		// TODO Auto-generated constructor stub
-		//gameFrameController = new GameFrameController(this);
-		screenGame = new PanelMap_1();
+		gameFrameController = new GameFrameController(this);
 		// labelScore = new JLabel(score.getScore()+"");
 		setTitle("Game Snake");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,18 +58,33 @@ public class GameFrameView extends JFrame implements Runnable{
 	public GameFrameView(ScreenGame screenGame) {
 		
 	}
+	
+	
+
+	public ScreenGame getScreenGame() {
+		return screenGame;
+	}
+
+	public void setScreenGame(ScreenGame screenGame) {
+		this.screenGame = screenGame;
+	}
+
+
 
 	public class handler implements KeyListener {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			// TODO Auto-generated method stub
 //		gameFrameController.handlerKeyPress(e);
+			gameFrameController.getKeyPressSnake(e);
+			
 		}
 
 		@Override
 		public void keyTyped(KeyEvent e) {
 			// TODO Auto-generated method stub
-
+			gameFrameController.getKeyPressSnake(e);
+			
 		}
 
 		@Override
