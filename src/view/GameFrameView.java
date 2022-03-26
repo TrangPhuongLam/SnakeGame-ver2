@@ -21,7 +21,7 @@ public class GameFrameView extends JFrame implements Runnable{
 	Thread thread;
 	PanelNavigationGameFrame panelNavigationGameFrame;
 	GameFrameController gameFrameController;
-	public ScreenGame screenGame = new ScreenGame();
+	public ScreenGame screenGame = new PanelMap_1();
 	static final int WIDTH = 413, HEIGHT = 472;
 
 	public GameFrameView(int width, int height) {

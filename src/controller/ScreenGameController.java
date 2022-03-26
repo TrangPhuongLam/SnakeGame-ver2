@@ -38,8 +38,8 @@ public class ScreenGameController {
 //		state = new GameState();
 //		score = new Score();
 
-//		apple = new Apple();
-//		mushroom = new Mushroom();
+		apple = new Apple(screenGame.width, screenGame.height, snake.unit_size);
+		mushroom = new Mushroom(screenGame.width, screenGame.height, snake.unit_size);
 		
 
 		
@@ -56,8 +56,6 @@ public class ScreenGameController {
 
 	//Paint character: snake, food, barrier
 	public void paint(Graphics g) {
-//		apple.paint(g);
-//		mushroom.paint(g);
 		
 //		if (!state.getPlaying())
 //			if (!state.getStartGame()) {
@@ -73,6 +71,9 @@ public class ScreenGameController {
 //		}
 		
 		snake.paintSnake(g);
+		apple.paintFood(g);
+		mushroom.paintFood(g);
+		
 	}
 
 	public void state() {
@@ -100,6 +101,10 @@ public class ScreenGameController {
 	public void startGame() {
 		if(snake.running) {
 			snake.moving();
+			snake.eatApple(apple);
+			snake.eatMushroom(mushroom);
+			snake.collision();
+			snake.returnSnake();
 		}else {
 		}
 		
@@ -108,6 +113,14 @@ public class ScreenGameController {
 	public void handlerKeyPress(KeyEvent e) {
 		Snake.HandlerKeyPress handlerKeyPress = snake.new HandlerKeyPress(e);
 		System.out.println("snake key press");
+	}
+	
+	public int getScreenWidth() {
+		return screenGame.width;
+	}
+	
+	public int getScreenHeight() {
+		return screenGame.height;
 	}
 	
 }

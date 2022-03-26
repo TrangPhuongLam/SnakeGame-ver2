@@ -12,17 +12,15 @@ import javax.swing.Timer;
 
 import controller.ScreenGameController;
 
-public  class ScreenGame extends JPanel implements Runnable{
-	 Thread thread;
-	 ScreenGameController screenGameController;
-	 public static int width = 400, height = 400;
-	 private ImageIcon iconBgScreenGame;
-	 Timer timer;
+public  abstract class ScreenGame extends JPanel implements Runnable{
+	protected Thread thread;
+	protected ScreenGameController screenGameController;
+	public static int width = 400, height = 400;
 	
-	 public ScreenGame() {
+	public ScreenGame() {
 			this(width, height);
-		} 
-	 
+	} 
+ 
 	public ScreenGame(int width, int height) {
 		// TODO Auto-generated constructor stub
 		this.width = width;
@@ -30,7 +28,7 @@ public  class ScreenGame extends JPanel implements Runnable{
 		
 		
 		screenGameController = new ScreenGameController(this);
-		iconBgScreenGame = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\bg.png");
+		
 		thread = new Thread(this);
 		thread.start();
 	}
@@ -58,9 +56,10 @@ public  class ScreenGame extends JPanel implements Runnable{
 		ScreenGame.height = height;
 	}
 
-	public void paintScreenGame(Graphics g) {
-		g.drawImage(iconBgScreenGame.getImage(), 0, 0, getWidth(), getHeight(), null);
-	}
+	public abstract void paintScreenGame(Graphics g) ;
+	//----------- implement paintScreenGame --------------
+		//g.drawImage(iconBgScreenGame.getImage(), 0, 0, getWidth(), getHeight(), null);
+	
 	
 	@Override
 	public void run() {
@@ -81,7 +80,7 @@ public  class ScreenGame extends JPanel implements Runnable{
 		repaint();
 			
 			try {
-				thread.sleep(200);
+				thread.sleep(150);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

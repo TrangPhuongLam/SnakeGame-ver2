@@ -19,38 +19,38 @@ import view.GameFrameView;
 
 public class Snake {
 	private char direction = 'R';
-	static int screenWidth = 800, screenHeight = 600, unit_size =50;
+	static int screenWidth = 800, screenHeight = 600;
+	public static int unit_size =50;
 	static final int GAME_UNIT = (screenWidth * screenHeight) / (unit_size * unit_size);
 	private int[] x = new int[GAME_UNIT];
 	private int[] y = new int[GAME_UNIT];
-	private int bodySnake = 6;
+	private int bodySnake = 3;
 	public boolean running = true;
-	private int appleEating, mushroomEating, energyEating;
-	private Food apple, mushroom, energy;
-	private Barrier wall;
+	private int appleEating = 0, mushroomEating = 0, energyEating = 0;
 	
 	
 //	private HighScore highScore;
 	private GameState state;
-	static int speed = 500;
-	private ImageIcon iconHeadUp, iconHeadDown, iconHeadLeft, iconHeadRight, iconBody;
+	private ImageIcon iconHeadUp, iconHeadDown, iconHeadLeft, iconHeadRight, iconBody, iconHead;
 	
 	public Snake(int screenWidth, int screenHeight) {
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
 		
 		// TODO Auto-generated constructor stub
+
 		iconHeadUp = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\Head_Up.png");
 		iconHeadDown = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\Head_Down.png");
 		iconHeadLeft = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\Head_Left.png");
 		iconHeadRight = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\Head_Right.png");
 		iconBody = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\body.png");
 		
+		
+		iconHead = iconHeadRight;
 		this.unit_size = iconHeadUp.getIconWidth();
 		
-		snakePositionInitial();
-		moving();
 		
+		snakePositionInitial();
 	}
 	
 	
@@ -58,7 +58,7 @@ public class Snake {
 	public void paintSnake(Graphics g) {
 		for(int i = 0; i< bodySnake;i++) {
 			if(i == 0) {
-				g.drawImage(iconHeadRight.getImage(), x[i], y[i], 
+				g.drawImage(iconHead.getImage(), x[i], y[i], 
 						unit_size, unit_size, null);
 			}
 			else {
@@ -85,11 +85,60 @@ public class Snake {
 		System.out.println(Arrays.toString(x));
 		System.out.println(Arrays.toString(y));
 	}
-	public void eatFood() {
-		
+	
+	public void eatApple(Food apple) {
+		if((x[0] == apple.getxFood()) && (y[0] == apple.getyFood())) {
+			bodySnake++;
+			appleEating++;
+			apple.randomFood();
+		}
+	}
+
+	public void eatMushroom(Food mushroom) {
+		if (bodySnake < 2) {
+			running = false;
+			System.out.println("Game Over!");
+			System.out.println("Apple eating: " + appleEating);
+			System.out.println("Mushroom eating: " + mushroomEating);
+		}else 
+		if((x[0] == mushroom.getxFood()) && (y[0] == mushroom.getyFood())) {
+			bodySnake--;
+			mushroomEating++;
+			mushroom.randomFood();
+		}
 	}
 	
 	public void collision() {
+		//checks if head collides with body
+		for(int i = bodySnake;i>0;i--) {
+			//check head move right to body 
+			
+			if((x[0] == x[i])&& (y[0] == y[i])) {
+				running = false;
+			}
+		}
+		
+//		//check if head touches left border
+//		if(x[0] < 0) {
+//			running = false;
+//		}
+//		//check if head touches right border
+//		if(x[0] > screenWidth) {
+//			running = false;
+//		}
+//		//check if head touches top border
+//		if(y[0] < 0) {
+//			running = false;
+//		}
+//		//check if head touches bottom border
+//		if(y[0] > screenHeight) {
+//			running = false;
+//		}
+		
+		
+	}
+	
+	public void collision(Barrier wall) {
 		
 	}
 	
@@ -117,6 +166,39 @@ public class Snake {
 		}
 	}
 	
+	public void returnSnake() {
+		//Right side
+		if (x[0] == screenWidth) {
+			for (int i = 0; i < bodySnake; i++) {
+				x[i] = 0 - (i * unit_size);
+				
+			}
+		}else
+			//Left side
+			if (x[0] == (0 - unit_size)) {
+				for (int i = 0; i < bodySnake; i++) {
+					x[i] = screenWidth + ((i - 1) * unit_size);
+					
+				}
+		}else
+			//Bottom side
+			if (y[0] == screenHeight) {
+				for (int i = 0; i < bodySnake; i++) {
+					y[i] = 0 - (i * unit_size);
+					
+				}
+		}else
+			//Top side
+			if (y[0] == (0 - unit_size)) {
+				for (int i = 0; i < bodySnake; i++) {
+					y[i] = screenHeight + ((i - 1) * unit_size);
+					
+				}
+		}
+		
+	}
+	
+	
 	public class HandlerKeyPress implements KeyListener{
 		public HandlerKeyPress(KeyEvent e) {
 			// TODO Auto-generated constructor stub
@@ -131,21 +213,25 @@ public class Snake {
 			case 'a':
 				if(direction != 'R') {
 					direction = 'L';
+					iconHead = iconHeadLeft;
 				}
 				break;
 			case 'd':
 				if(direction != 'L') {
 					direction = 'R';
+					iconHead = iconHeadRight;
 				}
 				break;
 			case 'w':
 				if(direction != 'D') {
 					direction = 'U';
+					iconHead = iconHeadUp;
 				}
 				break;
 			case 's':
 				if(direction != 'U') {
 					direction = 'D';
+					iconHead = iconHeadDown;
 				}
 				break;
 
@@ -161,22 +247,25 @@ public class Snake {
 			case KeyEvent.VK_LEFT:
 				if(direction != 'R') {
 					direction = 'L';
+					iconHead = iconHeadLeft;
 				}
 				break;
 			case KeyEvent.VK_RIGHT:
 				if(direction != 'L') {
 					direction = 'R';
+					iconHead = iconHeadRight;
 				}
 				break;
 			case KeyEvent.VK_UP:
 				if(direction != 'D') {
 					direction = 'U';
-					System.out.println("A hi hi");
+					iconHead = iconHeadUp;
 				}
 				break;
 			case KeyEvent.VK_DOWN:
 				if(direction != 'U') {
 					direction = 'D';
+					iconHead = iconHeadDown;
 				}
 				break;
 
