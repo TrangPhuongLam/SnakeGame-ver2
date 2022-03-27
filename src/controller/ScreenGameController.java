@@ -10,6 +10,8 @@ import javax.swing.ImageIcon;
 import abstractSnakeGame.Barrier;
 import abstractSnakeGame.Food;
 import abstractSnakeGame.ScreenGame;
+import context.CollisionContext;
+import context.EatingContext;
 import model.Apple;
 import model.Energy;
 import model.GameState;
@@ -28,6 +30,8 @@ public class ScreenGameController {
 //	private Score score;
 	Food apple, mushroom, energy;
 	Barrier swamp, wall;
+	private EatingContext snakeEatingContext;
+	private CollisionContext snakeCollisionContext;
 
 	public ScreenGameController(ScreenGame screenGame) {
 		super();
@@ -42,6 +46,9 @@ public class ScreenGameController {
 		energy = new Energy(screenGame.width, screenGame.height, snake.unit_size);
 		swamp = new Swamp(screenGame.width, screenGame.height, snake.unit_size);
 		wall = new Wall(screenGame.width, screenGame.height, snake.unit_size);
+		
+		snakeEatingContext = new EatingContext(snake);
+		snakeCollisionContext = new CollisionContext(snake);
 		
 	}
 	
@@ -115,12 +122,8 @@ public class ScreenGameController {
 	public void startGame() {
 		if(snake.running) {
 			snake.moving();
-			snake.eatApple(apple);
-			snake.eatMushroom(mushroom);
-			snake.eatEnergy(energy);
-			snake.collisionBody();
-			snake.collisionSwamp(swamp);
-			snake.collisionWall(wall);
+			snakeEatingContext.excuteEating(apple, mushroom, energy);
+			snakeCollisionContext.excuteCollision(wall, swamp);
 			snake.returnSnake();
 		}else {
 		}

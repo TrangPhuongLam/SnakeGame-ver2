@@ -15,9 +15,12 @@ import javax.swing.Timer;
 
 import abstractSnakeGame.Barrier;
 import abstractSnakeGame.Food;
+import context.EatingContext;
+import interfaceSnakeGame.Collision;
+import interfaceSnakeGame.Eating;
 import view.GameFrameView;
 
-public class Snake {
+public class Snake implements Eating, Collision{
 	private char direction = 'R';
 	static int screenWidth = 800, screenHeight = 600;
 	public static int unit_size =50;
@@ -84,6 +87,10 @@ public class Snake {
 		}
 		System.out.println(Arrays.toString(x));
 		System.out.println(Arrays.toString(y));
+	}
+	
+	public void eatFood(EatingContext Food) {
+		
 	}
 	
 	public void eatApple(Food apple) {
@@ -228,6 +235,23 @@ public class Snake {
 	}
 	
 	
+	
+	public int getAppleEating() {
+		return appleEating;
+	}
+
+	public int getMushroomEating() {
+		return mushroomEating;
+	}
+
+	public int getEnergyEating() {
+		return energyEating;
+	}
+
+	public int getSwampEating() {
+		return swampEating;
+	}
+
 	public class HandlerKeyPress implements KeyListener{
 		public HandlerKeyPress(KeyEvent e) {
 			// TODO Auto-generated constructor stub

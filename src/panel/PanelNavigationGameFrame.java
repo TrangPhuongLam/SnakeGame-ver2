@@ -10,18 +10,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
+import controller.NavigationController;
+
 public class PanelNavigationGameFrame extends JPanel{
 	public JLabel labelScore, labelMaxScore;
 	public int heightNavigation = 0;
+	private NavigationController navigationController;
 	
 	public PanelNavigationGameFrame(int width, int height) {
 		// TODO Auto-generated constructor stub
+		navigationController = new NavigationController(this);
 		paintFrame(width, height);
 		
 	}
 	
 	public void paintFrame(int width, int height) {
 		heightNavigation = height / 10;
+		
 		SpringLayout layoutN = new SpringLayout();
 		this.setLayout(layoutN);
 		this.setPreferredSize(new Dimension(width, heightNavigation));
