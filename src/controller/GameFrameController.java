@@ -17,7 +17,7 @@ public class GameFrameController {
 	}
 	
 	public void getKeyPressSnake(KeyEvent e) {
-		ScreenGame.HandlerKeyPress handlerKeyPress = screenGame.new HandlerKeyPress(e);
+		ScreenGame.ScreenGameKeyPress handlerKeyPress = screenGame.new ScreenGameKeyPress(e);
 	}
 	
 }

@@ -71,23 +71,24 @@ public class LevelView extends JFrame{
 			// TODO Auto-generated method stub
 			if(e.getSource() == panelContentLevel.getBtMap1()) {
 				levelController.Map1();
+				dispose();
 				
 			}
 			
 			if(e.getSource() == panelContentLevel.getBtMap2()) {
-				levelController.Map1();
-				
+				levelController.Map2();
+				dispose();
 			}
 			
 			if(e.getSource() == panelContentLevel.getBtMap3()) {
-				levelController.Map1();
-				
+				levelController.Map3();
+				dispose();
 			}
 			
 			if(e.getSource() == panelContentLevel.getBtBack()) {
 				menuView = new MenuView();
 //				menuView.setVisible(true);
-//				dispose();
+				dispose();
 			}
 		}
 

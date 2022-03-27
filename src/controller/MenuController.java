@@ -2,7 +2,9 @@ package controller;
 
 import javax.swing.JOptionPane;
 
+import abstractSnakeGame.ScreenGame;
 import interfaceSnakeGame.Controller;
+import panel.PanelMap_1;
 import view.GameFrameView;
 import view.HelpView;
 import view.LevelView;
@@ -10,6 +12,7 @@ import view.MenuView;
 
 public class MenuController implements Controller{
 	public MenuView menuView;
+	public ScreenGame screenGame;
 
 	public MenuController(MenuView menuView) {
 		super();
@@ -18,7 +21,8 @@ public class MenuController implements Controller{
 	
 	@Override
 	public void newGame() {
-		GameFrameView gameFrameView = new GameFrameView();
+		screenGame = new PanelMap_1();
+		GameFrameView gameFrameView = new GameFrameView(screenGame);
 		menuView.setVisible(false);
 	}
 

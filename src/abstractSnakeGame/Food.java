@@ -1,6 +1,7 @@
 package abstractSnakeGame;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -10,6 +11,8 @@ import controller.ScreenGameController;
 public abstract class Food {
 	protected int xFood, yFood, screenWidth = 4, screenHeight = 4, unit_size = 4;
 	protected ScreenGameController controller;
+	protected ImageIcon iconFoodResize;
+	protected Image imageFood, imageResize;
 	protected Random random;
 	
 	public Food(int screenWidth, int screenHeight, int unit_size) {
@@ -20,6 +23,7 @@ public abstract class Food {
 		
 		random = new Random();
 		randomFood();
+		
 	}
 	
 	
@@ -37,12 +41,16 @@ public abstract class Food {
  * @param g
  */
 	
-	public abstract void paintFood(Graphics g);
-	/**------------- implement paintFood ------------
-		g.drawImage(iconFood.getImage(), xFood, yFood, 
-			iconFood.getIconWidth(), iconFood.getIconHeight(), null);
- * 
- */
+	public void paintFood(Graphics g) {
+		g.drawImage(iconFoodResize.getImage(), xFood, yFood, 
+				iconFoodResize.getIconWidth(), iconFoodResize.getIconHeight(), null);
+	}
+	
+	public void resizeFood(ImageIcon icon) {
+		imageFood = icon.getImage();
+		imageResize = imageFood.getScaledInstance(unit_size, unit_size, Image.SCALE_SMOOTH);
+		iconFoodResize = new ImageIcon(imageResize);
+	}
 
 	public int getxFood() {
 		return xFood;

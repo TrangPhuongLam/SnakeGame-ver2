@@ -26,8 +26,8 @@ public class Snake {
 	private int[] y = new int[GAME_UNIT];
 	private int bodySnake = 3;
 	public boolean running = true;
-	private int appleEating = 0, mushroomEating = 0, energyEating = 0;
-	
+	private int appleEating = 0, mushroomEating = 0, energyEating = 0, swampEating = 0;
+	private int speed = 0;
 	
 //	private HighScore highScore;
 	private GameState state;
@@ -108,13 +108,29 @@ public class Snake {
 		}
 	}
 	
-	public void collision() {
+	public void eatEnergy(Food energy) {
+		if((x[0] == energy.getxFood()) && (y[0] == energy.getyFood())) {
+			if (speed < 400) {
+				speed += 50;
+			}
+			energyEating++;
+			energy.randomFood();
+		}
+	}
+	
+	
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void collisionBody() {
 		//checks if head collides with body
 		for(int i = bodySnake;i>0;i--) {
 			//check head move right to body 
 			
 			if((x[0] == x[i])&& (y[0] == y[i])) {
 				running = false;
+				System.out.println("Game Over!");
 			}
 		}
 		
@@ -138,8 +154,21 @@ public class Snake {
 		
 	}
 	
-	public void collision(Barrier wall) {
-		
+	public void collisionWall(Barrier wall) {
+		if((x[0] == wall.getxBarrier()) && (y[0] == wall.getyBarrier())) {
+			running = false;
+			
+		}
+	}
+	
+	public void collisionSwamp(Barrier swamp) {
+		if((x[0] == swamp.getxBarrier()) && (y[0] == swamp.getyBarrier())) {
+			if (speed > -100) {
+				speed -= 50;
+			}
+			swampEating++;
+			swamp.randomBarrier();
+		}
 	}
 	
 	public void moving() {

@@ -15,52 +15,49 @@ import javax.swing.SpringLayout;
 import abstractSnakeGame.ScreenGame;
 import controller.GameFrameController;
 import panel.PanelMap_1;
+import panel.PanelMap_2;
 import panel.PanelNavigationGameFrame;
 
 public class GameFrameView extends JFrame implements Runnable{
 	Thread thread;
 	PanelNavigationGameFrame panelNavigationGameFrame;
 	GameFrameController gameFrameController;
-	public ScreenGame screenGame = new PanelMap_1();
-	static final int WIDTH = 413, HEIGHT = 472;
+	public static ScreenGame screenGame ;
+	static  int width = 400, height = 400;//w 413, h 472
 
-	public GameFrameView(int width, int height) {
+	public GameFrameView(ScreenGame map) {
 		// TODO Auto-generated constructor stub
+		this.width = screenGame.width +15;
+		this.height = screenGame.height + 40;
+		screenGame = map;
+		
 		gameFrameController = new GameFrameController(this);
 		// labelScore = new JLabel(score.getScore()+"");
 		setTitle("Game Snake");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(width, height));
+		
 		setLocationRelativeTo(null);
 		setResizable(false);
 		this.setLayout(new BorderLayout());
 		this.addKeyListener(new handler());
 		
 		//----------------- Panel Navigation Game Frame -----------------
-		panelNavigationGameFrame = new PanelNavigationGameFrame(width, height);
-		
+		panelNavigationGameFrame = new PanelNavigationGameFrame(this.width, this.height);
+		setSize(new Dimension(this.width, this.height + panelNavigationGameFrame.heightNavigation));
 		
 		thread = new Thread(this);
 		thread.start();
 		
 		
+		
 		add(panelNavigationGameFrame, BorderLayout.NORTH);
 		add(screenGame, BorderLayout.CENTER);
-		
 		setVisible(true);
-	}
-	
-	public GameFrameView() {
-		// TODO Auto-generated constructor stub
-		this(WIDTH, HEIGHT);
-	}
-	
-	public GameFrameView(ScreenGame screenGame) {
 		
+	
 	}
 	
 	
-
 	public ScreenGame getScreenGame() {
 		return screenGame;
 	}
