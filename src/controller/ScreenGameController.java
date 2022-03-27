@@ -12,6 +12,8 @@ import abstractSnakeGame.Food;
 import abstractSnakeGame.ScreenGame;
 import context.CollisionContext;
 import context.EatingContext;
+import decorater.PlayerDecorater_1;
+import interfaceSnakeGame.ShapePlayer;
 import model.Apple;
 import model.Energy;
 import model.GameState;
@@ -32,12 +34,14 @@ public class ScreenGameController {
 	Barrier swamp, wall;
 	private EatingContext snakeEatingContext;
 	private CollisionContext snakeCollisionContext;
+	private ShapePlayer playerDecorator_1, snakePlayer;
 
 	public ScreenGameController(ScreenGame screenGame) {
 		super();
 		this.screenGame = screenGame;
 		
 		snake = new Snake(screenGame.width, screenGame.height);
+//		snakePlayer = new Snake(screenGame.width, screenGame.height);
 //		state = new GameState();
 //		score = new Score();
 
@@ -49,6 +53,8 @@ public class ScreenGameController {
 		
 		snakeEatingContext = new EatingContext(snake);
 		snakeCollisionContext = new CollisionContext(snake);
+		
+		playerDecorator_1 = new PlayerDecorater_1(snake);
 		
 	}
 	
@@ -69,7 +75,8 @@ public class ScreenGameController {
 //			state.setStartGame(true);
 //		}
 		
-		snake.paintSnake(g);
+//		snake.paintSnake(g);
+		playerDecorator_1.paintSkin(g);
 		apple.paintFood(g);
 		mushroom.paintFood(g);
 		
@@ -88,7 +95,8 @@ public class ScreenGameController {
 	}
 	
 	public void paintMap_3(Graphics g) {
-		snake.paintSnake(g);
+//		snake.paintSnake(g);
+		playerDecorator_1.paintSkin(g);
 		apple.paintFood(g);
 		mushroom.paintFood(g);
 		energy.paintFood(g);

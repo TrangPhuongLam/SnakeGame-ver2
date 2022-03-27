@@ -18,7 +18,7 @@ public  abstract class ScreenGame extends JPanel implements Runnable{
 	protected ScreenGameController screenGameController;
 	protected ImageIcon iconBgResize;
 	protected Image imageBgScreenGame, imageResize;
-	public static int width = 600, height = 500;
+	public static int width = 400, height = 400;
 	
 	
 	public ScreenGame() {

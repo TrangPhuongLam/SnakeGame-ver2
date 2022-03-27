@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -18,9 +19,10 @@ import abstractSnakeGame.Food;
 import context.EatingContext;
 import interfaceSnakeGame.Collision;
 import interfaceSnakeGame.Eating;
+import interfaceSnakeGame.ShapePlayer;
 import view.GameFrameView;
 
-public class Snake implements Eating, Collision{
+public class Snake implements Eating, Collision, ShapePlayer{
 	private char direction = 'R';
 	static int screenWidth = 800, screenHeight = 600;
 	public static int unit_size =50;
@@ -63,6 +65,7 @@ public class Snake implements Eating, Collision{
 			if(i == 0) {
 				g.drawImage(iconHead.getImage(), x[i], y[i], 
 						unit_size, unit_size, null);
+				
 			}
 			else {
 				g.drawImage(iconBody.getImage(), x[i], y[i], 
@@ -335,5 +338,69 @@ public class Snake implements Eating, Collision{
 		
 	}
 
-	
+	@Override
+	public void paintSkin(Graphics g) {
+		// TODO Auto-generated method stub
+		for(int i = 0; i< bodySnake;i++) {
+			if(i == 0) {
+				g.drawImage(iconHead.getImage(), x[i], y[i], 
+						unit_size, unit_size, null);
+			}
+			else {
+				g.drawImage(iconBody.getImage(), x[i], y[i], 
+						unit_size, unit_size, null);
+			}	
+	}
+	}
+
+
+
+	@Override
+	public int[] getXPlayer() {
+		// TODO Auto-generated method stub
+		return x;
+	}
+
+
+
+	@Override
+	public int[] getYPlayer() {
+		// TODO Auto-generated method stub
+		return y;
+	}
+
+
+
+	@Override
+	public int getUnit_size() {
+		// TODO Auto-generated method stub
+		return unit_size;
+	}
+
+
+
+	@Override
+	public int setUnit_size(int unit_size) {
+		// TODO Auto-generated method stub
+		return this.unit_size = unit_size;
+	}
+
+
+
+	@Override
+	public int getBodyPlayer() {
+		// TODO Auto-generated method stub
+		return bodySnake;
+	}
+
+
+
+	@Override
+	public int getGAME_UNIT() {
+		// TODO Auto-generated method stub
+		return GAME_UNIT;
+	}
+
+
+
 }
