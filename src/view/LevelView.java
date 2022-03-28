@@ -22,12 +22,11 @@ public class LevelView extends JFrame{
 	static MenuView menuView;
 	private PanelBgLevel panelBgLevel;
 	private PanelContentLevel panelContentLevel;
-	private LevelController levelController;
+	private LevelController levelController = new LevelController(this);
 	static final int WIDTH = 300, HEIGHT = 350;
 
 	public LevelView(int width, int height) {
 		
-		levelController = new LevelController(this);
 
 		setTitle("Level");
 		setSize(new Dimension(width, height));
@@ -62,6 +61,11 @@ public class LevelView extends JFrame{
 	
 	public LevelView() {
 		this(WIDTH, HEIGHT);
+	}
+	
+	public LevelView(LevelController levelController) {
+		this(WIDTH, HEIGHT);
+		this.levelController = levelController;
 	}
 	
 	private class handler implements MouseListener{

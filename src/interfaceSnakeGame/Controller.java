@@ -8,6 +8,8 @@ public interface Controller {
 	public void scoreGame();
 
 	public void levelGame();
+	
+	public void playerGame();
 
 	public void helpGame();
 }

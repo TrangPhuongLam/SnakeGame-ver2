@@ -9,6 +9,7 @@ import view.GameFrameView;
 import view.HelpView;
 import view.LevelView;
 import view.MenuView;
+import view.PlayerView;
 
 public class MenuController implements Controller{
 	public MenuView menuView;
@@ -53,18 +54,23 @@ public class MenuController implements Controller{
 
 	@Override
 	public void levelGame() {
-		LevelView lv = new LevelView(300, 350);
-		lv.setVisible(true);
-		menuView.setVisible(false);
+		LevelView levelView = new LevelView();
+		
 
 	}
 
 	@Override
 	public void helpGame() {
 		// TODO Auto-generated method stub
-		HelpView helpView = new HelpView(530, 646);
-		helpView.setVisible(true);
-		menuView.setVisible(false);
+		HelpView helpView = new HelpView();
+		
+	}
+
+	@Override
+	public void playerGame() {
+		// TODO Auto-generated method stub
+		PlayerView playerView = new PlayerView();
+		
 	}
 
 }

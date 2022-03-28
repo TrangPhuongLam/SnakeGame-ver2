@@ -9,10 +9,11 @@ import javax.swing.ImageIcon;
 
 import abstractSnakeGame.Barrier;
 import abstractSnakeGame.Food;
+import abstractSnakeGame.PaintMapObserver;
 import abstractSnakeGame.ScreenGame;
 import context.CollisionContext;
 import context.EatingContext;
-import decorater.PlayerDecorater_1;
+import decorater.PlayerDecorator_1;
 import interfaceSnakeGame.ShapePlayer;
 import model.Apple;
 import model.Energy;
@@ -21,11 +22,12 @@ import model.Mushroom;
 import model.Snake;
 import model.Swamp;
 import model.Wall;
+import observer.PaintMap_1;
 import panel.PanelMap_1;
 
 
 public class ScreenGameController {
-	ScreenGame screenGame;
+	static ScreenGame screenGame;
 	public static Snake snake;
 	private GameState state;
 
@@ -34,14 +36,15 @@ public class ScreenGameController {
 	Barrier swamp, wall;
 	private EatingContext snakeEatingContext;
 	private CollisionContext snakeCollisionContext;
-	private ShapePlayer playerDecorator_1, snakePlayer;
+	private ShapePlayer playerDecorator_1;
+	private PlayerController playerController;
+	private PaintMapObserver paintMapObserver;
 
 	public ScreenGameController(ScreenGame screenGame) {
 		super();
 		this.screenGame = screenGame;
 		
 		snake = new Snake(screenGame.width, screenGame.height);
-//		snakePlayer = new Snake(screenGame.width, screenGame.height);
 //		state = new GameState();
 //		score = new Score();
 
@@ -54,11 +57,16 @@ public class ScreenGameController {
 		snakeEatingContext = new EatingContext(snake);
 		snakeCollisionContext = new CollisionContext(snake);
 		
-		playerDecorator_1 = new PlayerDecorater_1(snake);
+		playerDecorator_1 = new PlayerDecorator_1(snake);
+		
+		playerController = new PlayerController();
+		
 		
 	}
 	
-	
+	public ScreenGameController() {
+		this(screenGame);
+	}
 	//Paint character: snake, food, barrier
 	public void paint(Graphics g) {
 		
@@ -83,13 +91,17 @@ public class ScreenGameController {
 	}
 	
 	public void paintMap_1(Graphics g) {
-		snake.paintSnake(g);
+//		snake.paintSnake(g);
+//		playerDecorator_1.paintSkin(g);
+		paintMapObserver = new PaintMap_1(playerController);
+		paintMapObserver.paintMap(g, snake);
 		apple.paintFood(g);
 		
 	}
 	
 	public void paintMap_2(Graphics g) {
-		snake.paintSnake(g);
+//		snake.paintSnake(g);
+		playerDecorator_1.paintSkin(g);
 		apple.paintFood(g);
 		mushroom.paintFood(g);
 	}
@@ -104,6 +116,12 @@ public class ScreenGameController {
 		wall.paintBarrier(g);
 	}
 
+	public void paintMap(Graphics g, String playerDecoratorName) {
+		playerController.setPlayerDecoratorName(playerDecoratorName);
+		paintMapObserver = new PaintMap_1(playerController);
+		paintMapObserver.paintMap(g, snake);
+		apple.paintFood(g);
+	}
 
 	public void state() {
 //		if (!state.getgameOver()) {
@@ -154,5 +172,15 @@ public class ScreenGameController {
 	public int getScreenHeight() {
 		return screenGame.height;
 	}
+
+
+	public PlayerController getPlayerController() {
+		return playerController;
+	}
+
+
+
+	
+	
 	
 }

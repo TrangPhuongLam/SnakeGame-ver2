@@ -19,16 +19,26 @@ public  abstract class ScreenGame extends JPanel implements Runnable{
 	protected ImageIcon iconBgResize;
 	protected Image imageBgScreenGame, imageResize;
 	public static int width = 400, height = 400;
+	protected static String playerDecoratorName = "playerDecorator1";
 	
-	
-	public ScreenGame() {
-		// TODO Auto-generated constructor stub
+	public ScreenGame(String playerDecoratorName) {
+		System.out.println("in screengame(string) input:" + playerDecoratorName);
+		this.playerDecoratorName = playerDecoratorName;
 		screenGameController = new ScreenGameController(this);
 		
 		
 		thread = new Thread(this);
 		thread.start();
+		
+		System.out.println("in screengame(string)" + this.playerDecoratorName);
+		
 	}
+	
+	public ScreenGame() {
+		// TODO Auto-generated constructor stub
+		this(playerDecoratorName);
+	}
+	
 	
 	@Override
 	protected abstract void paintComponent(Graphics g);
@@ -80,6 +90,16 @@ public  abstract class ScreenGame extends JPanel implements Runnable{
 		
 	}
 	}
+	
+	public static String getPlayerDecoratorName() {
+		return playerDecoratorName;
+	}
+
+	public static void setPlayerDecoratorName(String playerDecoratorName) {
+		ScreenGame.playerDecoratorName = playerDecoratorName;
+	}
+
+
 
 	public class ScreenGameKeyPress implements KeyListener{
 		public ScreenGameKeyPress(KeyEvent e) {

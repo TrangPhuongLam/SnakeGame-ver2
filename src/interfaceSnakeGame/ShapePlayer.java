@@ -10,5 +10,7 @@ public int getUnit_size();
 public int setUnit_size(int unit_size);
 public int getBodyPlayer();
 public int getGAME_UNIT();
+public char getDirection();
+public boolean getRunningPlayer();
 
 }

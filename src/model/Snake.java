@@ -403,4 +403,20 @@ public class Snake implements Eating, Collision, ShapePlayer{
 
 
 
+	@Override
+	public boolean getRunningPlayer() {
+		// TODO Auto-generated method stub
+		return running;
+	}
+
+
+
+	@Override
+	public char getDirection() {
+		// TODO Auto-generated method stub
+		return direction;
+	}
+
+
+
 }

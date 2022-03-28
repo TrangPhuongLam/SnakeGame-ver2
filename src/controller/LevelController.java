@@ -16,8 +16,13 @@ public class LevelController {
 		super();
 		this.levelView = levelView;
 		
+	}
+	
+	public LevelController(String playerDecoratorName) {
 		
-		
+		this.map1.setPlayerDecoratorName(playerDecoratorName);
+		this.map2 = map1;
+		this.map3 = map1;
 	}
 	
 	public void Map1() {

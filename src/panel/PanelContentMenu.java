@@ -9,8 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class PanelContentMenu extends JPanel{
-	private JButton btPlay, btLevel, btScore, btHelp, btExit;
-	private ImageIcon iconPlay, iconLevel, iconScore, iconHelp, iconExit;
+	private JButton btPlay, btLevel, btScore, btPlayer, btHelp, btExit;
+	private ImageIcon iconPlay, iconLevel, iconScore, iconPlayer, iconHelp, iconExit;
 	private final int WIDTH = 102, HEIGHT = 300;
 	
 	public PanelContentMenu() {
@@ -38,6 +38,13 @@ public class PanelContentMenu extends JPanel{
 		btScore.setContentAreaFilled(false);
 		btScore.setFocusable(false);
 		btScore.setPreferredSize(new Dimension(87, 35));
+		
+		iconPlayer = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\Options.png");
+		btPlayer = new JButton(iconPlayer);
+		btPlayer.setBorderPainted(false);
+		btPlayer.setContentAreaFilled(false);
+		btPlayer.setFocusable(false);
+		btPlayer.setPreferredSize(new Dimension(87, 35));
 
 		iconHelp = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\Help.png");
 		btHelp = new JButton(iconHelp);
@@ -58,6 +65,7 @@ public class PanelContentMenu extends JPanel{
 		this.add(btPlay);
 		this.add(btLevel);
 		this.add(btScore);
+		this.add(btPlayer);
 		this.add(btHelp);
 		this.add(btExit);
 	}
@@ -78,6 +86,10 @@ public class PanelContentMenu extends JPanel{
 
 	public JButton getBtScore() {
 		return btScore;
+	}
+	
+	public JButton getBtPlayer() {
+		return btPlayer;
 	}
 
 	public JButton getBtHelp() {

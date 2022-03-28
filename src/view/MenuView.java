@@ -21,6 +21,7 @@ import panel.PanelContentMenu;
 public class MenuView extends JFrame{
 	static LevelView levelView;
 	static HelpView helpView;
+	static PlayerView playerView;
 	public MenuController menuController;
 	private PanelBgMenu panelBgMenu;
 	private PanelContentMenu panelContentMenu;
@@ -43,6 +44,7 @@ public class MenuView extends JFrame{
 		panelContentMenu = new PanelContentMenu();
 		panelContentMenu.getBtPlay().addMouseListener(new handler());
 		panelContentMenu.getBtLevel().addMouseListener(new handler());
+		panelContentMenu.getBtPlayer().addMouseListener(new handler());
 		panelContentMenu.getBtHelp().addMouseListener(new handler());
 		panelContentMenu.getBtScore().addMouseListener(new handler());
 		panelContentMenu.getBtExit().addMouseListener(new handler());
@@ -66,12 +68,17 @@ public class MenuView extends JFrame{
 			}
 			
 			if(e.getSource() == panelContentMenu.getBtLevel()) {
-				levelView = new LevelView();
+				menuController.levelGame();
+				dispose();
+			}
+			
+			if(e.getSource() == panelContentMenu.getBtPlayer()) {
+				menuController.playerGame();
 				dispose();
 			}
 			
 			if(e.getSource() == panelContentMenu.getBtHelp()) {
-				helpView = new HelpView();
+				menuController.helpGame();
 				dispose();
 			}
 			
@@ -112,9 +119,15 @@ public class MenuView extends JFrame{
 			}
 			
 			if(e.getSource() == panelContentMenu.getBtLevel()) {
-				ImageIcon iconMap3 = new ImageIcon("D:\\git\\GameSnake\\src\\data\\Level1.png");
-				panelContentMenu.getBtLevel().setIcon(iconMap3);
+				ImageIcon iconLevel = new ImageIcon("D:\\git\\GameSnake\\src\\data\\Level1.png");
+				panelContentMenu.getBtLevel().setIcon(iconLevel);
 				panelContentMenu.getBtLevel().setPreferredSize(new Dimension(120, 45));
+			}
+			
+			if(e.getSource() == panelContentMenu.getBtPlayer()) {
+				ImageIcon iconPlayer = new ImageIcon("D:\\git\\GameSnake\\src\\data\\Options1.png");
+				panelContentMenu.getBtPlayer().setIcon(iconPlayer);
+				panelContentMenu.getBtPlayer().setPreferredSize(new Dimension(120, 45));
 			}
 			
 			if(e.getSource() == panelContentMenu.getBtScore()) {
@@ -146,9 +159,15 @@ public class MenuView extends JFrame{
 			}
 			
 			if(e.getSource() == panelContentMenu.getBtLevel()) {
-				ImageIcon iconMap3 = new ImageIcon("D:\\git\\GameSnake\\src\\data\\Level.png");
-				panelContentMenu.getBtLevel().setIcon(iconMap3);
+				ImageIcon iconLevel = new ImageIcon("D:\\git\\GameSnake\\src\\data\\Level.png");
+				panelContentMenu.getBtLevel().setIcon(iconLevel);
 				panelContentMenu.getBtLevel().setPreferredSize(new Dimension(105, 30));
+			}
+			
+			if(e.getSource() == panelContentMenu.getBtPlayer()) {
+				ImageIcon iconPlayer = new ImageIcon("D:\\git\\GameSnake\\src\\data\\Options.png");
+				panelContentMenu.getBtPlayer().setIcon(iconPlayer);
+				panelContentMenu.getBtPlayer().setPreferredSize(new Dimension(105, 30));
 			}
 			
 			if(e.getSource() == panelContentMenu.getBtScore()) {
