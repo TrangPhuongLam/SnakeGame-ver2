@@ -53,16 +53,8 @@ public class ScreenGameController {
 //		state = new GameState();
 //		score = new Score();
 
-		foodFactory = new FoodFactory();
-		paintMapFactory = new PaintMapFactory();
-		
-		swamp = new Swamp(screenGame.width, screenGame.height, snake.unit_size);
-		wall = new Wall(screenGame.width, screenGame.height, snake.unit_size);
-		
 		snakeEatingContext = new EatingContext(snake);
 		snakeCollisionContext = new CollisionContext(snake);
-		
-		
 		
 		playerChose = new PlayerChose();
 		paintMapObserver = new PaintMap_ver1(playerChose, snake);
@@ -125,11 +117,9 @@ public class ScreenGameController {
 			snake.moving();
 			snakeEatingContext.excuteEating(paintMapObserver.getApple(), 
 					paintMapObserver.getMushroom(), paintMapObserver.getEnergy());
-			snakeCollisionContext.excuteCollision(wall, swamp);
+			snakeCollisionContext.excuteCollision(paintMapObserver.getWall(), paintMapObserver.getSwamp());
 			snake.returnSnake();
-		}else {
 		}
-		
 	}
 	
 	public int speedSnake() {

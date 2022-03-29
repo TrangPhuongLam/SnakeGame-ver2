@@ -60,6 +60,7 @@ public  abstract class ScreenGame extends JPanel implements Runnable{
 	
 	
 	public void paintScreenGame(Graphics g){
+		System.out.println("Im in paint screen game");
 		g.drawImage(iconBgResize.getImage(), 0, 0, width, height, null);
 	}
 	
@@ -82,9 +83,8 @@ public  abstract class ScreenGame extends JPanel implements Runnable{
 		screenGameController.startGame();
 		running = screenGameController.getSnake().getRunningPlayer();
 		repaint();
-			
 			try {
-				thread.sleep(450 - screenGameController.speedSnake());
+				thread.sleep(350 - screenGameController.speedSnake());
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -101,7 +101,9 @@ public  abstract class ScreenGame extends JPanel implements Runnable{
 		ScreenGame.playerDecoratorName = playerDecoratorName;
 	}
 
-
+	public  ScreenGameController getScreenGameController() {
+		return this.screenGameController;
+	}
 
 	public class ScreenGameKeyPress implements KeyListener{
 		public ScreenGameKeyPress(KeyEvent e) {

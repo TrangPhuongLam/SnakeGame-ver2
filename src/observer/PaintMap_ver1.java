@@ -15,7 +15,7 @@ public class PaintMap_ver1 extends PaintMapObserver{
 	public PaintMap_ver1(PlayerChose playerChose, ShapePlayer player) {
 		super(playerChose, player);
 		// TODO Auto-generated constructor stub
-		System.out.println("in paint map 1 (playerchose, player) " + this.playerChose.getPlayerDecoratorName());
+		System.out.println("in paint map ver 1 (playerchose, player) " + this.playerChose.getPlayerDecoratorName());
 		this.playerDecorator = playerDecoratorFactory.getPlayerDecorator(this.playerChose.getPlayerDecoratorName(), 
 				this.player);
 		this.apple = foodFactory.getFood("apple", this.player.getScreenWidth(), 
@@ -39,7 +39,7 @@ public class PaintMap_ver1 extends PaintMapObserver{
 	public void paintMap(Graphics g) {
 		//Paint player decorator
 		playerDecorator.paintSkin(g);
-		
+		System.out.println();
 		//Paint food
 		apple.paintFood(g);
 	}
@@ -84,7 +84,7 @@ public class PaintMap_ver1 extends PaintMapObserver{
 		//Paint Barrier
 		swamp.paintBarrier(g);
 		wall.paintBarrier(g);
-		
+		System.out.println("im in paint map 3");
 	}
 
 }

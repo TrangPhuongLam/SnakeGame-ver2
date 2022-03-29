@@ -24,7 +24,7 @@ public class MenuController implements Controller{
 	public void newGame() {
 		screenGame = new PanelMap_1();
 		GameFrameView gameFrameView = new GameFrameView(screenGame);
-		menuView.setVisible(false);
+		menuView.dispose();
 	}
 
 	@Override

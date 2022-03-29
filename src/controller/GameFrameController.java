@@ -3,6 +3,8 @@ package controller;
 import java.awt.event.KeyEvent;
 
 import abstractSnakeGame.ScreenGame;
+import model.Snake;
+import panel.PanelNavigationGameFrame;
 import view.GameFrameView;
 
 public class GameFrameController {
@@ -19,5 +21,7 @@ public class GameFrameController {
 	public void getKeyPressSnake(KeyEvent e) {
 		ScreenGame.ScreenGameKeyPress handlerKeyPress = screenGame.new ScreenGameKeyPress(e);
 	}
+	
+	
 	
 }

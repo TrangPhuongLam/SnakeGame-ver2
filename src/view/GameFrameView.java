@@ -27,10 +27,10 @@ public class GameFrameView extends JFrame implements Runnable{
 
 	public GameFrameView(ScreenGame map) {
 		// TODO Auto-generated constructor stub
-		this.width = screenGame.width +15;
-		this.height = screenGame.height + 40;
-		screenGame = map;
-		
+		this.width = screenGame.width + 15;
+		this.height = screenGame.height + 90;
+		this.screenGame = map;
+		System.out.println("im in game frame");
 		gameFrameController = new GameFrameController(this);
 		// labelScore = new JLabel(score.getScore()+"");
 		setTitle("Game Snake");
@@ -42,7 +42,7 @@ public class GameFrameView extends JFrame implements Runnable{
 		this.addKeyListener(new handler());
 		
 		//----------------- Panel Navigation Game Frame -----------------
-		panelNavigationGameFrame = new PanelNavigationGameFrame(this.width, this.height);
+		panelNavigationGameFrame = new PanelNavigationGameFrame(this.width, this.height, this.screenGame);
 		setSize(new Dimension(this.width, this.height + panelNavigationGameFrame.heightNavigation));
 		
 		thread = new Thread(this);
@@ -64,6 +64,28 @@ public class GameFrameView extends JFrame implements Runnable{
 
 	public void setScreenGame(ScreenGame screenGame) {
 		this.screenGame = screenGame;
+	}
+
+
+
+	public PanelNavigationGameFrame getPanelNavigationGameFrame() {
+		return panelNavigationGameFrame;
+	}
+
+
+	public void setPanelNavigationGameFrame(PanelNavigationGameFrame panelNavigationGameFrame) {
+		this.panelNavigationGameFrame = panelNavigationGameFrame;
+	}
+
+
+
+	public GameFrameController getGameFrameController() {
+		return gameFrameController;
+	}
+
+
+	public void setGameFrameController(GameFrameController gameFrameController) {
+		this.gameFrameController = gameFrameController;
 	}
 
 
@@ -94,8 +116,11 @@ public class GameFrameView extends JFrame implements Runnable{
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+//		boolean running = true;
+//		while(running) {
+//			running = screenGame.getScreenGameController().getSnake().getRunningPlayer();
+//			System.out.println("in run game frame");
+//		}
 	}
 
 }
