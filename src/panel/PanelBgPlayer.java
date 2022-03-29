@@ -2,6 +2,7 @@ package panel;
 
 import java.awt.Graphics;
 
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -10,7 +11,7 @@ public class PanelBgPlayer extends JPanel{
 	
 	public PanelBgPlayer() {
 		// TODO Auto-generated constructor stub
-		iconBgPlayer = new ImageIcon("D:\\git\\GameSnake\\src\\data\\levelbg.png");
+		iconBgPlayer = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\playerbg.png");
 	}
 	
 	@Override

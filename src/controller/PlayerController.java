@@ -11,30 +11,45 @@ import model.Snake;
 import panel.PanelMap_1;
 import panel.PanelMap_3;
 import view.GameFrameView;
+import view.LevelView;
 import view.PlayerView;
 
 public class PlayerController {
-	private PlayerView playerView;
-	private String playerDecoratorName = "playerDecorator2";
-	private ArrayList<PaintMapObserver> paintMapObservers = new ArrayList<PaintMapObserver>();
+	private String playerDecoratorName = "playerDecorator1";
+	private LevelController levelController;
+	private LevelView levelView;
 	
-	private ScreenGameController screenGameController;
-
 	public PlayerController() {
-		super();
+		// TODO Auto-generated constructor stub
 	}
 	
-	public void attach(PaintMapObserver map) {
-		paintMapObservers.add(map);
+	public String getPlayerDecorator_1() {
+		return this.playerDecoratorName = "playerDecorator1";
+		
+	}
+
+	public String getPlayerDecorator_2() {
+		return this.playerDecoratorName = "playerDecorator2";
 	}
 	
-	public String getPlayerDecoratorName() {
-		return playerDecoratorName;
+	public String getPlayerDecorator_3() {
+		return this.playerDecoratorName = "playerDecorator3";
 	}
 
-	public void setPlayerDecoratorName(String playerDecoratorName) {
-		this.playerDecoratorName = playerDecoratorName;
+	public void chosePlayerDecorator_1() {
+		levelController = new LevelController(getPlayerDecorator_1());
+		levelView = new LevelView(levelController);
 	}
 
-
+	public void chosePlayerDecorator_2() {
+		levelController = new LevelController(getPlayerDecorator_2());
+		levelView = new LevelView(levelController);
+	}
+	
+	public void chosePlayerDecorator_3() {
+		levelController = new LevelController(getPlayerDecorator_3());
+		levelView = new LevelView(levelController);
+	}
+	
+	
 }

@@ -8,15 +8,24 @@ import abstractSnakeGame.ScreenGame;
 
 public class PanelMap_3 extends ScreenGame{
 	private ImageIcon iconBgMap3 =  new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\map_3.png");
-	public PanelMap_3() {
-		// TODO Auto-generated constructor stub
+	
+	public PanelMap_3(String playerDecoratorName) {
+		this.playerDecoratorName = playerDecoratorName;
 		resizeImage(iconBgMap3);
-		
+		System.out.println("pannelMap_3(string)" + this.playerDecoratorName);
 	}
+	
+	public PanelMap_3() {
+		resizeImage(iconBgMap3);
+		System.out.println("pannelMap_3()");
+	}
+	
+	
+
 	@Override
 	protected void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
 		paintScreenGame(g);
-		screenGameController.paintMap_3(g);
+		System.out.println("in panel 3 panintComponent()" + this.playerDecoratorName);
+		screenGameController.paintMap(g, this.playerDecoratorName, "paintmap3");
 	}
 }

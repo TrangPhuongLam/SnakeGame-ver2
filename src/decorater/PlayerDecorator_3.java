@@ -12,6 +12,14 @@ public class PlayerDecorator_3 extends ShapePlayerDecorator{
 	public PlayerDecorator_3(ShapePlayer playerDecorator) {
 		super(playerDecorator);
 		// TODO Auto-generated constructor stub
+		iconHead_Down = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\cloak_superman_down.png"); 
+		iconHead_Up = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\cloak_superman_up.png");
+		iconHead_Left = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\cloak_superman_left.png");
+		iconHead_Right = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\cloak_superman_right.png");
+		
+		iconHead = iconHead_Right;
+		
+		iconBody = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\cloak_superman_body.png"); 
 	}
 	
 	@Override
@@ -23,17 +31,23 @@ public class PlayerDecorator_3 extends ShapePlayerDecorator{
 	
 	public void paintPlayer(ShapePlayer playerDecorator, Graphics g) {
 		this.running = playerDecorator.getRunningPlayer();
-		
+		directionIconHead();
 		if (running) {
 			for(int i = 0; i< bodyPlayer;i++) {
-				if(i == 0) {
-					g.drawImage(iconHeadPlayer.getImage(), x[i], y[i], 
-							unit_size, unit_size, null);
+				if(i == 1) {
+					g.drawImage(iconHead.getImage(), x[i] - 5, y[i] - 5, 
+							unit_size + 10, unit_size +10, null);
+				}else if (i > 1 ) {
+					g.drawImage(iconBody.getImage(), x[i] - 5, y[i] - 5, 
+							unit_size + 10, unit_size +10, null);
 				}
+				
+				
 				
 			}
 			
 		}
+		
 	}
 
 }

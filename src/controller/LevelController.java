@@ -11,6 +11,7 @@ public class LevelController {
 	public LevelView levelView;
 	public GameFrameView gameFrameMap1, gameFrameMap2, gameFrameMap3;
 	public ScreenGame map1, map2, map3;
+	public static String playerDecoratorName = "playerDecoratorName1";
 
 	public LevelController(LevelView levelView) {
 		super();
@@ -21,8 +22,12 @@ public class LevelController {
 	public LevelController(String playerDecoratorName) {
 		
 		this.map1.setPlayerDecoratorName(playerDecoratorName);
-		this.map2 = map1;
-		this.map3 = map1;
+		this.map2.setPlayerDecoratorName(playerDecoratorName);
+		this.map3.setPlayerDecoratorName(playerDecoratorName);
+	}
+	
+	public LevelController() {
+		this(playerDecoratorName);
 	}
 	
 	public void Map1() {

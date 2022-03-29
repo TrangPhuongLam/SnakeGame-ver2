@@ -10,7 +10,7 @@ public class PanelBgLevel extends JPanel{
 	
 	public PanelBgLevel() {
 		// TODO Auto-generated constructor stub
-		iconBgLevel = new ImageIcon("D:\\git\\GameSnake\\src\\data\\levelbg.png");
+		iconBgLevel = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\levelbg.png");
 	}
 	
 	@Override

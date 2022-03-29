@@ -14,7 +14,8 @@ public abstract class ShapePlayerDecorator implements ShapePlayer{
 	protected int bodyPlayer = 1;
 	protected int unit_size = 1;
 	protected char direction = 'R';
-	protected ImageIcon iconHead_Down, iconHead_Up, iconHead_Left, iconHead_Right, iconHead;
+	protected int screenWidth = 1, screenHeight = 1;
+	protected ImageIcon iconHead_Down, iconHead_Up, iconHead_Left, iconHead_Right, iconHead, iconBody;
 
 	public ShapePlayerDecorator(ShapePlayer playerDecorator) {
 		super();
@@ -26,6 +27,8 @@ public abstract class ShapePlayerDecorator implements ShapePlayer{
 		this.bodyPlayer = playerDecorator.getBodyPlayer();
 		this.unit_size = playerDecorator.getUnit_size();
 		this.running = playerDecorator.getRunningPlayer();
+		this.screenWidth = playerDecorator.getScreenWidth();
+		this.screenHeight = playerDecorator.getScreenHeight();
 	}
 	
 	public void paintSkin(Graphics g) {
@@ -57,21 +60,7 @@ public abstract class ShapePlayerDecorator implements ShapePlayer{
 		}
 	}
 	
-	public void paintPlayer(ShapePlayer playerDecorator, Graphics g) {
-		this.running = playerDecorator.getRunningPlayer();
-		directionIconHead();
-		if (running) {
-			for(int i = 0; i< bodyPlayer;i++) {
-				if(i == 1) {
-					g.drawImage(iconHead.getImage(), x[i], y[i], 
-							unit_size, unit_size, null);
-				}
-				
-			}
-			
-		}
-		
-	}
+	public abstract void paintPlayer(ShapePlayer playerDecorator, Graphics g); 
 	
 	@Override
 	public int[] getXPlayer() {
@@ -113,5 +102,17 @@ public abstract class ShapePlayerDecorator implements ShapePlayer{
 	public char getDirection() {
 		// TODO Auto-generated method stub
 		return direction;
+	}
+	
+	@Override
+	public int getScreenWidth() {
+		// TODO Auto-generated method stub
+		return screenWidth;
+	}
+
+	@Override
+	public int getScreenHeight() {
+		// TODO Auto-generated method stub
+		return screenHeight;
 	}
 }

@@ -21,9 +21,9 @@ public class LevelView extends JFrame{
 
 	static MenuView menuView;
 	private PanelBgLevel panelBgLevel;
-	private PanelContentLevel panelContentLevel;
+	private static PanelContentLevel panelContentLevel = new PanelContentLevel();
 	private LevelController levelController = new LevelController(this);
-	static final int WIDTH = 300, HEIGHT = 350;
+	static  int width = panelContentLevel.getWIDTH() * 2, height = panelContentLevel.getHEIGHT() + 100;
 
 	public LevelView(int width, int height) {
 		
@@ -42,15 +42,14 @@ public class LevelView extends JFrame{
 		setContentPane(panelBgLevel);
 
 		// ----------------- Panel Content Level -----------------
-		panelContentLevel = new PanelContentLevel();
 		panelContentLevel.getBtMap1().addMouseListener(new handler());
 		panelContentLevel.getBtMap2().addMouseListener(new handler());
 		panelContentLevel.getBtMap3().addMouseListener(new handler());
 		panelContentLevel.getBtBack().addMouseListener(new handler());
 		
 		
-		layout.putConstraint(SpringLayout.NORTH, panelContentLevel, 65, SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, panelContentLevel, 90, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.NORTH, panelContentLevel, this.height / 5, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, panelContentLevel, this.width / 4, SpringLayout.WEST, this);
 		setLayout(layout);
 		
 		
@@ -60,11 +59,11 @@ public class LevelView extends JFrame{
 	}
 	
 	public LevelView() {
-		this(WIDTH, HEIGHT);
+		this(width, height);
 	}
 	
 	public LevelView(LevelController levelController) {
-		this(WIDTH, HEIGHT);
+		this(width, height);
 		this.levelController = levelController;
 	}
 	

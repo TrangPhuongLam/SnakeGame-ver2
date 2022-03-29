@@ -419,4 +419,20 @@ public class Snake implements Eating, Collision, ShapePlayer{
 
 
 
+	@Override
+	public int getScreenWidth() {
+		// TODO Auto-generated method stub
+		return screenWidth;
+	}
+
+
+
+	@Override
+	public int getScreenHeight() {
+		// TODO Auto-generated method stub
+		return screenHeight;
+	}
+
+
+
 }

@@ -18,7 +18,6 @@ public class PanelMap_1 extends ScreenGame{
 	}
 	
 	public PanelMap_1() {
-		// TODO Auto-generated constructor stub
 		resizeImage(iconBgMap1);
 		System.out.println("pannelMap_1()");
 	}
@@ -27,11 +26,9 @@ public class PanelMap_1 extends ScreenGame{
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
 		paintScreenGame(g);
-//		screenGameController.paintMap_1(g);
-		System.out.println("in panintComponent()" + this.playerDecoratorName);
-		screenGameController.paintMap(g, this.playerDecoratorName);
+		System.out.println("in panel 1 panintComponent()" + this.playerDecoratorName);
+		screenGameController.paintMap(g, this.playerDecoratorName, "paintmap1");
 	}
 	
 

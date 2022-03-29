@@ -13,7 +13,7 @@ public class PanelContentHelp extends JPanel{
 	public PanelContentHelp() {
 		// TODO Auto-generated constructor stub
 		//button Back
-		ImageIcon iconBack = new ImageIcon("D:\\git\\GameSnake\\src\\data\\back.png");
+		ImageIcon iconBack = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\back.png");
 		btBack = new JButton(iconBack);
 		btBack.setBorderPainted(false);
 		btBack.setContentAreaFilled(false);

@@ -8,11 +8,16 @@ import abstractSnakeGame.ShapePlayerDecorator;
 import interfaceSnakeGame.ShapePlayer;
 
 public class PlayerDecorator_2 extends ShapePlayerDecorator{
-	private ImageIcon iconHeadPlayer = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\headSnake_1_Down.png");
 	
 	public PlayerDecorator_2(ShapePlayer playerDecorator) {
 		super(playerDecorator);
 		// TODO Auto-generated constructor stub
+		iconHead_Down = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\headSnake_1_down.png"); 
+		iconHead_Up = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\headSnake_1_up.png");
+		iconHead_Left = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\headSnake_1_left.png");
+		iconHead_Right = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\headSnake_1_right.png");
+		
+		iconHead = iconHead_Right;
 	}
 
 	@Override
@@ -24,17 +29,18 @@ public class PlayerDecorator_2 extends ShapePlayerDecorator{
 	
 	public void paintPlayer(ShapePlayer playerDecorator, Graphics g) {
 		this.running = playerDecorator.getRunningPlayer();
-		
+		directionIconHead();
 		if (running) {
 			for(int i = 0; i< bodyPlayer;i++) {
 				if(i == 0) {
-					g.drawImage(iconHeadPlayer.getImage(), x[i], y[i], 
-							unit_size, unit_size, null);
+					g.drawImage(iconHead.getImage(), x[i] - 10, y[i] - 10, 
+							unit_size + 20, unit_size + 20, null);
 				}
 				
 			}
 			
 		}
+		
 	}
 
 }

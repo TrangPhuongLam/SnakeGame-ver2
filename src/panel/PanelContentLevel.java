@@ -10,14 +10,14 @@ import javax.swing.JPanel;
 public class PanelContentLevel extends JPanel{
 	private JButton btMap1, btMap2, btMap3, btBack;
 	private ImageIcon iconMap1, iconMap2, iconMap3, iconBack;
-	private final int 	WIDTH = 102, HEIGHT = 300;
+	private final int 	WIDTH = 150, HEIGHT = 300;
 	
 	public PanelContentLevel() {
 		// TODO Auto-generated constructor stub
 		this.setLayout(new GridLayout(6, 1));
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		
-		iconMap1 = new ImageIcon("D:\\git\\GameSnake\\src\\data\\easy.png");
+		iconMap1 = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\easy.png");
 		btMap1 = new JButton(iconMap1);
 		btMap1.setBorderPainted(false);
 		btMap1.setContentAreaFilled(false);
@@ -27,7 +27,7 @@ public class PanelContentLevel extends JPanel{
 
 		// create button Normal, hidden background button Normal and event button Normal
 
-		iconMap2 = new ImageIcon("D:\\git\\GameSnake\\src\\data\\normal.png");
+		iconMap2 = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\normal.png");
 		btMap2 = new JButton(iconMap2);
 		btMap2.setBorderPainted(false);
 		btMap2.setContentAreaFilled(false);
@@ -37,7 +37,7 @@ public class PanelContentLevel extends JPanel{
 
 		// create button Hard, hidden background button hard and event button Hard
 
-		iconMap3 = new ImageIcon("D:\\git\\GameSnake\\src\\data\\hard.png");
+		iconMap3 = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\hard.png");
 		btMap3 = new JButton(iconMap3);
 		btMap3.setBorderPainted(false);
 		btMap3.setContentAreaFilled(false);
@@ -47,7 +47,7 @@ public class PanelContentLevel extends JPanel{
 
 		// create button Exit...
 
-		iconBack = new ImageIcon("D:\\git\\GameSnake\\src\\data\\back.png");
+		iconBack = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\back.png");
 		btBack = new JButton(iconBack);
 		btBack.setBorderPainted(false);
 		btBack.setContentAreaFilled(false);
@@ -81,6 +81,14 @@ public class PanelContentLevel extends JPanel{
 
 	public JButton getBtMap3() {
 		return btMap3;
+	}
+
+	public int getWIDTH() {
+		return WIDTH;
+	}
+
+	public int getHEIGHT() {
+		return HEIGHT;
 	}
 
 	

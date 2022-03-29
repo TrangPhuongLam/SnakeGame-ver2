@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Dimension;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -9,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.SpringLayout;
 
 import controller.LevelController;
-import controller.PlayerChoseController;
 import controller.PlayerController;
 import controller.ScreenGameController;
 import panel.PanelBgLevel;
@@ -20,15 +20,14 @@ import panel.PanelContentPlayer;
 public class PlayerView extends JFrame{
 	static MenuView menuView;
 	private PanelBgPlayer panelBgPlayer;
-	private PanelContentPlayer panelContentPlayer;
+	private static PanelContentPlayer panelContentPlayer = new PanelContentPlayer();
 	private ScreenGameController screenGameController;
 	private PlayerController playerController;
-	static final int WIDTH = 300, HEIGHT = 350;
+	static  int width = panelContentPlayer.getWIDTH() + 200, height = panelContentPlayer.getHEIGHT() + 100;
 	
 	public PlayerView(int width, int height) {
 		// TODO Auto-generated constructor stub
-//		playerController = new PlayerController();
-//		screenGameController = new ScreenGameController();
+		playerController = new PlayerController();
 		setTitle("Player");
 		setSize(new Dimension(width, height));
 		setLocationRelativeTo(null);
@@ -43,15 +42,15 @@ public class PlayerView extends JFrame{
 		setContentPane(panelBgPlayer);
 
 		// ----------------- Panel Content Player -----------------
-		panelContentPlayer = new PanelContentPlayer();
+		
 		panelContentPlayer.getBtPlayer1().addMouseListener(new handler());
 		panelContentPlayer.getBtPlayer2().addMouseListener(new handler());
 		panelContentPlayer.getBtPlayer3().addMouseListener(new handler());
 		panelContentPlayer.getBtBack().addMouseListener(new handler());
 		
 		
-		layout.putConstraint(SpringLayout.NORTH, panelContentPlayer, 65, SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, panelContentPlayer, 90, SpringLayout.WEST, this);
+		layout.putConstraint(SpringLayout.NORTH, panelContentPlayer, panelContentPlayer.getHEIGHT() / 4  , SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, panelContentPlayer, panelContentPlayer.getWIDTH() / 4, SpringLayout.WEST, this);
 		setLayout(layout);
 		
 		
@@ -61,7 +60,7 @@ public class PlayerView extends JFrame{
 	}
 	
 	public PlayerView() {
-		this(WIDTH, HEIGHT);
+		this(width, height);
 	}
 
 	private class handler implements MouseListener{
@@ -70,27 +69,18 @@ public class PlayerView extends JFrame{
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			if(e.getSource() == panelContentPlayer.getBtPlayer1()) {
-//				screenGameController.getPlayerController().setPlayerDecoratorName("playerDecorator3");
-				System.out.println("1");
-				PlayerChoseController choseController = new PlayerChoseController();
-				System.out.println("2");
-				String player1 = choseController.getPlayerDecorator_1();
-				System.out.println("3");
-				LevelController levelController = new LevelController(player1);
-				System.out.println("4");
-				LevelView levelView = new LevelView(levelController);
-				
+				playerController.chosePlayerDecorator_1();
 				dispose();
 				
 			}
 			
 			if(e.getSource() == panelContentPlayer.getBtPlayer2()) {
-				playerController.setPlayerDecoratorName("playerDecorator2");
+				playerController.chosePlayerDecorator_2();
 				dispose();
 			}
 			
 			if(e.getSource() == panelContentPlayer.getBtPlayer3()) {
-				playerController.setPlayerDecoratorName("playerDecorator3");
+				playerController.chosePlayerDecorator_3();
 				dispose();
 			}
 			
@@ -117,27 +107,27 @@ public class PlayerView extends JFrame{
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
 			if(e.getSource() == panelContentPlayer.getBtPlayer1()) {
-				ImageIcon iconPlayer1 = new ImageIcon("D:\\git\\GameSnake\\src\\data\\easy1.png");
+				ImageIcon iconPlayer1 = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\crown1.png");
 				panelContentPlayer.getBtPlayer1().setIcon(iconPlayer1);
-				panelContentPlayer.getBtPlayer1().setPreferredSize(new Dimension(120, 45));
+				panelContentPlayer.getBtPlayer1().setPreferredSize(new Dimension(120, 120));
 			}
 			
 			if(e.getSource() == panelContentPlayer.getBtPlayer2()) {
-				ImageIcon iconPlayer2 = new ImageIcon("D:\\git\\GameSnake\\src\\data\\normal1.png");
+				ImageIcon iconPlayer2 = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\headSnake_1_1.png");
 				panelContentPlayer.getBtPlayer2().setIcon(iconPlayer2);
-				panelContentPlayer.getBtPlayer2().setPreferredSize(new Dimension(120, 45));
+				panelContentPlayer.getBtPlayer2().setPreferredSize(new Dimension(120, 120));
 			}
 			
 			if(e.getSource() == panelContentPlayer.getBtPlayer3()) {
-				ImageIcon iconPlayer3 = new ImageIcon("D:\\git\\GameSnake\\src\\data\\hard1.png");
+				ImageIcon iconPlayer3 = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\cloak_superman1.png");
 				panelContentPlayer.getBtPlayer3().setIcon(iconPlayer3);
-				panelContentPlayer.getBtPlayer3().setPreferredSize(new Dimension(120, 45));
+				panelContentPlayer.getBtPlayer3().setPreferredSize(new Dimension(120, 120));
 			}
 			
 			if(e.getSource() == panelContentPlayer.getBtBack()) {
-				ImageIcon iconBack = new ImageIcon("D:\\git\\GameSnake\\src\\data\\back1.png");
+				ImageIcon iconBack = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\back1.png");
 				panelContentPlayer.getBtBack().setIcon(iconBack);
-				panelContentPlayer.getBtBack().setPreferredSize(new Dimension(105, 30));
+				panelContentPlayer.getBtBack().setPreferredSize(new Dimension(120, 120));
 			}
 		}
 
@@ -145,27 +135,27 @@ public class PlayerView extends JFrame{
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
 			if(e.getSource() == panelContentPlayer.getBtPlayer1()) {
-				ImageIcon iconPlayer1 = new ImageIcon("D:\\git\\GameSnake\\src\\data\\easy.png");
+				ImageIcon iconPlayer1 = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\crown.png");
 				panelContentPlayer.getBtPlayer1().setIcon(iconPlayer1);
-				panelContentPlayer.getBtPlayer1().setPreferredSize(new Dimension(105, 30));
+				panelContentPlayer.getBtPlayer1().setPreferredSize(new Dimension(105, 105));
 			}
 			
 			if(e.getSource() == panelContentPlayer.getBtPlayer2()) {
-				ImageIcon iconPlayer2 = new ImageIcon("D:\\git\\GameSnake\\src\\data\\normal.png");
+				ImageIcon iconPlayer2 = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\headSnake_1.png");
 				panelContentPlayer.getBtPlayer2().setIcon(iconPlayer2);
-				panelContentPlayer.getBtPlayer2().setPreferredSize(new Dimension(105, 30));
+				panelContentPlayer.getBtPlayer2().setPreferredSize(new Dimension(105, 105));
 			}
 			
 			if(e.getSource() == panelContentPlayer.getBtPlayer3()) {
-				ImageIcon iconPlayer3 = new ImageIcon("D:\\git\\GameSnake\\src\\data\\hard.png");
+				ImageIcon iconPlayer3 = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\cloak_superman.png");
 				panelContentPlayer.getBtPlayer3().setIcon(iconPlayer3);
-				panelContentPlayer.getBtPlayer3().setPreferredSize(new Dimension(105, 30));
+				panelContentPlayer.getBtPlayer3().setPreferredSize(new Dimension(105, 105));
 			}
 			
 			if(e.getSource() == panelContentPlayer.getBtBack()) {
-				ImageIcon iconBack = new ImageIcon("D:\\git\\GameSnake\\src\\data\\back.png");
+				ImageIcon iconBack = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\back.png");
 				panelContentPlayer.getBtBack().setIcon(iconBack);
-				panelContentPlayer.getBtBack().setPreferredSize(new Dimension(105, 30));
+				panelContentPlayer.getBtBack().setPreferredSize(new Dimension(105, 105));
 			}
 		}
 		

@@ -40,11 +40,11 @@ public class PanelNavigationGameFrame extends JPanel{
 		labelMaxScore.setFont(labelMaxScore.getFont().deriveFont(15.0f));
 		labelMaxScore.setForeground(Color.WHITE);
 
-		ImageIcon iconApple = new ImageIcon("D:\\git\\GameSnake\\src\\data\\Apple.png");
+		ImageIcon iconApple = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\Apple.png");
 		JLabel labelApple = new JLabel();
 		labelApple.setIcon(iconApple);
 
-		ImageIcon iconCup = new ImageIcon("D:\\git\\GameSnake\\src\\data\\cup.png");
+		ImageIcon iconCup = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\cup.png");
 		JLabel labelCup = new JLabel();
 		labelCup.setIcon(iconCup);
 

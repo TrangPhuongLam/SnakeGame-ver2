@@ -10,7 +10,7 @@ public class PanelBgHelp extends JPanel{
 	
 	public PanelBgHelp() {
 		// TODO Auto-generated constructor stub
-		iconBgHelp = new ImageIcon("D:\\git\\GameSnake\\src\\data\\helpbg.png");
+		iconBgHelp = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\helpbg.png");
 	}
 	
 	@Override

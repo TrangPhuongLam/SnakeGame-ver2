@@ -12,5 +12,7 @@ public int getBodyPlayer();
 public int getGAME_UNIT();
 public char getDirection();
 public boolean getRunningPlayer();
+public int getScreenWidth();
+public int getScreenHeight();
 
 }

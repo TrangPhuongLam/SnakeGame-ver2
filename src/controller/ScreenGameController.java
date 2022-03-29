@@ -14,6 +14,8 @@ import abstractSnakeGame.ScreenGame;
 import context.CollisionContext;
 import context.EatingContext;
 import decorater.PlayerDecorator_1;
+import factory.FoodFactory;
+import factory.PaintMapFactory;
 import interfaceSnakeGame.ShapePlayer;
 import model.Apple;
 import model.Energy;
@@ -22,8 +24,9 @@ import model.Mushroom;
 import model.Snake;
 import model.Swamp;
 import model.Wall;
-import observer.PaintMap_1;
+import observer.PaintMap_ver1;
 import panel.PanelMap_1;
+import subject.PlayerChose;
 
 
 public class ScreenGameController {
@@ -36,9 +39,11 @@ public class ScreenGameController {
 	Barrier swamp, wall;
 	private EatingContext snakeEatingContext;
 	private CollisionContext snakeCollisionContext;
-	private ShapePlayer playerDecorator_1;
-	private PlayerController playerController;
 	private PaintMapObserver paintMapObserver;
+	private PlayerChose playerChose;
+	
+	private FoodFactory foodFactory;
+	private PaintMapFactory paintMapFactory;
 
 	public ScreenGameController(ScreenGame screenGame) {
 		super();
@@ -48,19 +53,19 @@ public class ScreenGameController {
 //		state = new GameState();
 //		score = new Score();
 
-		apple = new Apple(screenGame.width, screenGame.height, snake.unit_size);
-		mushroom = new Mushroom(screenGame.width, screenGame.height, snake.unit_size);
-		energy = new Energy(screenGame.width, screenGame.height, snake.unit_size);
+		foodFactory = new FoodFactory();
+		paintMapFactory = new PaintMapFactory();
+		
 		swamp = new Swamp(screenGame.width, screenGame.height, snake.unit_size);
 		wall = new Wall(screenGame.width, screenGame.height, snake.unit_size);
 		
 		snakeEatingContext = new EatingContext(snake);
 		snakeCollisionContext = new CollisionContext(snake);
 		
-		playerDecorator_1 = new PlayerDecorator_1(snake);
 		
-		playerController = new PlayerController();
 		
+		playerChose = new PlayerChose();
+		paintMapObserver = new PaintMap_ver1(playerChose, snake);
 		
 	}
 	
@@ -84,43 +89,13 @@ public class ScreenGameController {
 //		}
 		
 //		snake.paintSnake(g);
-		playerDecorator_1.paintSkin(g);
-		apple.paintFood(g);
-		mushroom.paintFood(g);
 		
 	}
 	
-	public void paintMap_1(Graphics g) {
-//		snake.paintSnake(g);
-//		playerDecorator_1.paintSkin(g);
-		paintMapObserver = new PaintMap_1(playerController);
-		paintMapObserver.paintMap(g, snake);
-		apple.paintFood(g);
-		
-	}
 	
-	public void paintMap_2(Graphics g) {
-//		snake.paintSnake(g);
-		playerDecorator_1.paintSkin(g);
-		apple.paintFood(g);
-		mushroom.paintFood(g);
-	}
-	
-	public void paintMap_3(Graphics g) {
-//		snake.paintSnake(g);
-		playerDecorator_1.paintSkin(g);
-		apple.paintFood(g);
-		mushroom.paintFood(g);
-		energy.paintFood(g);
-		swamp.paintBarrier(g);
-		wall.paintBarrier(g);
-	}
-
-	public void paintMap(Graphics g, String playerDecoratorName) {
-		playerController.setPlayerDecoratorName(playerDecoratorName);
-		paintMapObserver = new PaintMap_1(playerController);
-		paintMapObserver.paintMap(g, snake);
-		apple.paintFood(g);
+	public void paintMap(Graphics g, String playerDecoratorName, String paintMapName) {
+		playerChose.setPlayerDecoratorName(playerDecoratorName);
+		paintMapObserver.chosePaintMap(g, paintMapName);
 	}
 
 	public void state() {
@@ -148,7 +123,8 @@ public class ScreenGameController {
 	public void startGame() {
 		if(snake.running) {
 			snake.moving();
-			snakeEatingContext.excuteEating(apple, mushroom, energy);
+			snakeEatingContext.excuteEating(paintMapObserver.getApple(), 
+					paintMapObserver.getMushroom(), paintMapObserver.getEnergy());
 			snakeCollisionContext.excuteCollision(wall, swamp);
 			snake.returnSnake();
 		}else {
@@ -174,8 +150,9 @@ public class ScreenGameController {
 	}
 
 
-	public PlayerController getPlayerController() {
-		return playerController;
+
+	public static Snake getSnake() {
+		return snake;
 	}
 
 

@@ -77,8 +77,10 @@ public  abstract class ScreenGame extends JPanel implements Runnable{
 //			} catch (InterruptedException e) {
 //			}
 //		}
-		while(true) {
+		boolean running = true;
+		while(running) {
 		screenGameController.startGame();
+		running = screenGameController.getSnake().getRunningPlayer();
 		repaint();
 			
 			try {
