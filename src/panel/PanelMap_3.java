@@ -28,4 +28,6 @@ public class PanelMap_3 extends ScreenGame{
 		System.out.println("in panel 3 panintComponent()" + this.playerDecoratorName);
 		screenGameController.paintMap(g, this.playerDecoratorName, "paintmap3");
 	}
+	
+	
 }

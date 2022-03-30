@@ -6,9 +6,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
@@ -18,16 +21,22 @@ import abstractSnakeGame.ScreenGame;
 import controller.GameFrameController;
 import controller.NavigationController;
 import controller.ScreenGameController;
+import interfaceSnakeGame.VolumeState;
 import model.Snake;
+import volumeState.OnVolume;
 
 public class PanelNavigationGameFrame extends JPanel implements Runnable{
-	public JLabel labelAppleScore, labelMaxAppleScore, labelEnergyScore, labelMushroomScore, labelSwampScore;
+	private JLabel labelAppleScore, labelMaxAppleScore, labelEnergyScore, 
+	labelMushroomScore, labelSwampScore;
+	private JButton btVolume;
 	public int heightNavigation = 0;
 	private int appleScore = 0, energyScore = 0, mushroomScore = 0, swampScore = 0, highScore = 0;
 	private NavigationController navigationController;
 	private Thread thread;
 	private ScreenGame screenGame;
 	private static int width = 0, height = 0;
+	
+	private VolumeState volumeState = OnVolume.getInstance();
 	
 	public PanelNavigationGameFrame(int width, int height, ScreenGame screenGame) {
 		// TODO Auto-generated constructor stub
@@ -41,7 +50,12 @@ public class PanelNavigationGameFrame extends JPanel implements Runnable{
 		labelSwampScore = new JLabel("" + this.swampScore);
 		labelMaxAppleScore = new JLabel("" + this.highScore);
 
+		btVolume = new JButton();
+		btVolume.setPreferredSize(new Dimension(20, 20));
+		
+		
 		navigationController = new NavigationController(this, this.screenGame);
+		
 		
 		thread = new Thread(this);
 		thread.start();
@@ -88,18 +102,20 @@ public class PanelNavigationGameFrame extends JPanel implements Runnable{
 //		labelVolume.setIcon(new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\tao.png"));
 		
 
-//		ImageIcon iconVolume = new ImageIcon("D:\\git\\GameSnake\\src\\data\\volume.png");
-//		JButton btVolume = new JButton(iconVolume);
-//		btVolume.setPreferredSize(new Dimension(20, 16));
+		
+		
 //		btVolume.setBackground(new Color(0, 139, 69));
-//		btVolume.setBorderPainted(false);
+		btVolume.setBorderPainted(false);
+		btVolume.setContentAreaFilled(false);
+		btVolume.setFocusable(false);
+		btVolume.setIcon(resizeImage("D:\\git\\SnakeGame_ver2\\src\\data\\volume.png", 20, 20));
 
 		this.add(labelAppleScore);
 		this.add(labelEnergyScore);
 		this.add(labelMushroomScore);
 		this.add(labelSwampScore);
 		this.add(labelMaxAppleScore);
-//		this.add(btVolume);
+		this.add(btVolume);
 		
 
 		
@@ -118,8 +134,8 @@ public class PanelNavigationGameFrame extends JPanel implements Runnable{
 		layoutN.putConstraint(SpringLayout.WEST, labelMaxAppleScore, 300, SpringLayout.WEST, this);
 		layoutN.putConstraint(SpringLayout.NORTH, labelMaxAppleScore, 10, SpringLayout.NORTH, this);
 		
-//		layoutN.putConstraint(SpringLayout.NORTH, btVolume, 12, SpringLayout.NORTH, this);
-//		layoutN.putConstraint(SpringLayout.WEST, btVolume, 430, SpringLayout.WEST, this);
+		layoutN.putConstraint(SpringLayout.NORTH, btVolume, 10, SpringLayout.NORTH, this);
+		layoutN.putConstraint(SpringLayout.WEST, btVolume, 360, SpringLayout.WEST, this);
 
 	}
 	
@@ -179,7 +195,15 @@ public class PanelNavigationGameFrame extends JPanel implements Runnable{
 		this.highScore = highScore;
 	}
 	
-	
+	public JButton getBtVolume() {
+		return btVolume;
+	}
+
+
+	public void setBtVolume(JButton btVolume) {
+		this.btVolume = btVolume;
+	}
+
 
 	public ScreenGame getScreenGame() {
 		return screenGame;
@@ -190,7 +214,19 @@ public class PanelNavigationGameFrame extends JPanel implements Runnable{
 		this.screenGame = screenGame;
 	}
 
+	public VolumeState getVolumeState() {
+		return volumeState;
+	}
 
+
+	public void setVolumeState(VolumeState volumeState) {
+		this.volumeState = volumeState;
+	}
+
+	public boolean doAction(PanelNavigationGameFrame panelNavigationGameFrame) {
+		return volumeState.doAction(this);
+	}
+	
 	@Override
 	public void run() {
 		

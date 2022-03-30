@@ -29,5 +29,6 @@ public class PanelMap_2 extends ScreenGame{
 		screenGameController.paintMap(g, this.playerDecoratorName, "paintmap2");
 	}
 	
+	
 
 }

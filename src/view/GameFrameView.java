@@ -3,8 +3,11 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -14,9 +17,12 @@ import javax.swing.SpringLayout;
 
 import abstractSnakeGame.ScreenGame;
 import controller.GameFrameController;
+import interfaceSnakeGame.VolumeState;
 import panel.PanelMap_1;
 import panel.PanelMap_2;
 import panel.PanelNavigationGameFrame;
+import volumeState.OffVolume;
+import volumeState.OnVolume;
 
 public class GameFrameView extends JFrame implements Runnable{
 	Thread thread;
@@ -44,6 +50,8 @@ public class GameFrameView extends JFrame implements Runnable{
 		//----------------- Panel Navigation Game Frame -----------------
 		panelNavigationGameFrame = new PanelNavigationGameFrame(this.width, this.height, this.screenGame);
 		setSize(new Dimension(this.width, this.height + panelNavigationGameFrame.heightNavigation));
+		panelNavigationGameFrame.getBtVolume().addMouseListener(new HandlerMouse());
+		
 		
 		thread = new Thread(this);
 		thread.start();
@@ -54,7 +62,7 @@ public class GameFrameView extends JFrame implements Runnable{
 		add(screenGame, BorderLayout.CENTER);
 		setVisible(true);
 		
-	
+	System.out.println("im end game frame");
 	}
 	
 	
@@ -88,7 +96,56 @@ public class GameFrameView extends JFrame implements Runnable{
 		this.gameFrameController = gameFrameController;
 	}
 
+	public class HandlerMouse implements MouseListener{
 
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getSource() == panelNavigationGameFrame.getBtVolume()) {
+				if (panelNavigationGameFrame.getVolumeState().equals(OnVolume.getInstance())) {
+					panelNavigationGameFrame.setVolumeState(OffVolume.getInstance());
+				}else 
+					if (panelNavigationGameFrame.getVolumeState().equals(OffVolume.getInstance())) {
+					panelNavigationGameFrame.setVolumeState(OnVolume.getInstance());
+				}
+				
+			}
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getSource() == panelNavigationGameFrame.getBtVolume()) {
+				panelNavigationGameFrame.getBtVolume().setIcon(
+						panelNavigationGameFrame.resizeImage("D:\\git\\SnakeGame_ver2\\src\\data\\volume.png", 30, 30));
+				panelNavigationGameFrame.getBtVolume().setPreferredSize(new Dimension(30, 30));
+			}
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getSource() == panelNavigationGameFrame.getBtVolume()) {
+				panelNavigationGameFrame.getBtVolume().setIcon(
+						panelNavigationGameFrame.resizeImage("D:\\git\\SnakeGame_ver2\\src\\data\\volume.png", 20, 20));
+				
+				panelNavigationGameFrame.getBtVolume().setPreferredSize(new Dimension(20, 20));
+			}
+		}
+		
+	}
 
 	public class handler implements KeyListener {
 		@Override
@@ -116,11 +173,12 @@ public class GameFrameView extends JFrame implements Runnable{
 	
 	@Override
 	public void run() {
-//		boolean running = true;
-//		while(running) {
-//			running = screenGame.getScreenGameController().getSnake().getRunningPlayer();
-//			System.out.println("in run game frame");
-//		}
+		boolean running = true;
+		while(running) {
+			running = screenGame.getScreenGameController().getSnake().getRunningPlayer();
+			repaint();
+		}
+		
 	}
 
 }

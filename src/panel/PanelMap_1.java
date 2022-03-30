@@ -24,12 +24,21 @@ public class PanelMap_1 extends ScreenGame{
 	
 	
 
+//	@Override
+//	protected void paintComponent(Graphics g) {
+//		
+//		paintScreenGame(g);
+//		System.out.println("in panel 1 panintComponent()" + this.playerDecoratorName);
+//		screenGameController.paintMap(g, this.playerDecoratorName, "paintmap1");
+//	}
 	@Override
 	protected void paintComponent(Graphics g) {
+		// TODO Auto-generated method stub
 		paintScreenGame(g);
 		System.out.println("in panel 1 panintComponent()" + this.playerDecoratorName);
 		screenGameController.paintMap(g, this.playerDecoratorName, "paintmap1");
 	}
+	
 	
 
 	
