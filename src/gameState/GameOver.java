@@ -25,7 +25,7 @@ public class GameOver implements GameState{
 		// TODO Auto-generated method stub
 		g.setColor(Color.yellow);
 		g.fillRect(0, 0, 800, 800);
-		System.out.println("im in game over");
+//		System.out.println("im in game over");
 	}
 
 	public static GameOver getInstance() {

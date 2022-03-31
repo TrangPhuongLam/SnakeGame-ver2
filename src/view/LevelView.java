@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ import javax.swing.SpringLayout;
 import controller.LevelController;
 import panel.PanelBgLevel;
 import panel.PanelContentLevel;
+import volumeState.OnVolume;
 
 
 public class LevelView extends JFrame{
@@ -24,9 +26,10 @@ public class LevelView extends JFrame{
 	private static PanelContentLevel panelContentLevel = new PanelContentLevel();
 	private LevelController levelController = new LevelController(this);
 	static  int width = panelContentLevel.getWIDTH() * 2, height = panelContentLevel.getHEIGHT() + 100;
-
+	private Clip clip = OnVolume.getInstance().clipSound("D:\\git\\SnakeGame_ver2\\src\\data\\sound.wav");
+	
 	public LevelView(int width, int height) {
-		
+		clip.start();
 
 		setTitle("Level");
 		setSize(new Dimension(width, height));
@@ -67,11 +70,17 @@ public class LevelView extends JFrame{
 		this.levelController = levelController;
 	}
 	
+	public LevelView(MenuView menuView) {
+		this(width, height);
+		this.menuView = menuView;
+	}
+	
 	private class handler implements MouseListener{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			clip.stop();
 			if(e.getSource() == panelContentLevel.getBtMap1()) {
 				levelController.Map1();
 				dispose();

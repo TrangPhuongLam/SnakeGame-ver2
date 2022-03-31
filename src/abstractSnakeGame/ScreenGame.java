@@ -72,7 +72,7 @@ public  abstract class ScreenGame extends JPanel implements Runnable{
 	
 	
 	public void paintScreenGame(Graphics g){
-		System.out.println("Im in paint screen game");
+//		System.out.println("Im in paint screen game");
 		g.drawImage(iconBgResize.getImage(), 0, 0, width, height, null);
 	}
 	
@@ -93,28 +93,28 @@ public  abstract class ScreenGame extends JPanel implements Runnable{
 //			}
 //		
 //	}
-		boolean running = true;
-		while(running) {
+//		boolean running = true;
+//		while(running) {
 			
-			if (state.doAction(this)) {
-				
-		
-			screenGameController.startGame();
-			
-			if (!screenGameController.getSnake().getRunningPlayer()) {
-				state = GameOver.getInstance();
-				running = state.doAction(this);
-			}
-			repaint();
-			try {
-				thread.sleep(350 - screenGameController.speedSnake());
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			}	
-		}
+//			if (state.doAction(this)) {
+//				
+//		
+//			screenGameController.startGame();
+//			
+//			if (!screenGameController.getSnake().getRunningPlayer()) {
+//				state = GameOver.getInstance();
+//				running = state.doAction(this);
+//			}
+//			repaint();
+//			try {
+//				thread.sleep(350 - screenGameController.speedSnake());
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//			}	
+//		}
 	}
 	
 	public static String getPlayerDecoratorName() {

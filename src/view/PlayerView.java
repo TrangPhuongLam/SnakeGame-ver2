@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SpringLayout;
@@ -16,6 +17,7 @@ import panel.PanelBgLevel;
 import panel.PanelBgPlayer;
 import panel.PanelContentLevel;
 import panel.PanelContentPlayer;
+import volumeState.OnVolume;
 
 public class PlayerView extends JFrame{
 	static MenuView menuView;
@@ -24,9 +26,11 @@ public class PlayerView extends JFrame{
 	private ScreenGameController screenGameController;
 	private PlayerController playerController;
 	static  int width = panelContentPlayer.getWIDTH() + 200, height = panelContentPlayer.getHEIGHT() + 100;
+	private Clip clip = OnVolume.getInstance().clipSound("D:\\git\\SnakeGame_ver2\\src\\data\\sound.wav");
 	
 	public PlayerView(int width, int height) {
 		// TODO Auto-generated constructor stub
+		clip.start();
 		playerController = new PlayerController();
 		setTitle("Player");
 		setSize(new Dimension(width, height));
@@ -68,6 +72,7 @@ public class PlayerView extends JFrame{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			clip.stop();
 			if(e.getSource() == panelContentPlayer.getBtPlayer1()) {
 				playerController.chosePlayerDecorator_1();
 				dispose();

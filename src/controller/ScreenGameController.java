@@ -65,7 +65,7 @@ public class ScreenGameController {
 	}
 
 
-	public void startGame() {
+	public void startSnake() {
 		if(snake.running) {
 			snake.moving();
 			snakeEatingContext.excuteEating(paintMapObserver.getApple(), 

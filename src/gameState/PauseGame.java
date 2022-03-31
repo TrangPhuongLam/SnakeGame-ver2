@@ -25,7 +25,7 @@ public class PauseGame implements GameState{
 		// TODO Auto-generated method stub
 		g.setColor(Color.red);
 		g.fillRect(0, 0, 800, 800);
-		System.out.println("im in pause game");
+//		System.out.println("im in pause game");
 	}
 
 	public static PauseGame getInstance() {

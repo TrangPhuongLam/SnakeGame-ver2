@@ -39,7 +39,7 @@ public class PaintMap_ver1 extends PaintMapObserver{
 	public void paintMap(Graphics g) {
 		//Paint player decorator
 		playerDecorator.paintSkin(g);
-		System.out.println();
+//		System.out.println();
 		//Paint food
 		apple.paintFood(g);
 	}
@@ -84,7 +84,8 @@ public class PaintMap_ver1 extends PaintMapObserver{
 		//Paint Barrier
 		swamp.paintBarrier(g);
 		wall.paintBarrier(g);
-		System.out.println("im in paint map 3");
+		
+//		System.out.println("im in paint map 3");
 	}
 
 }

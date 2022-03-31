@@ -6,7 +6,11 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,6 +20,7 @@ import javax.swing.JPanel;
 import controller.MenuController;
 import panel.PanelBgMenu;
 import panel.PanelContentMenu;
+import volumeState.OnVolume;
 
 
 public class MenuView extends JFrame{
@@ -26,9 +31,14 @@ public class MenuView extends JFrame{
 	private PanelBgMenu panelBgMenu;
 	private PanelContentMenu panelContentMenu;
 	static final int WIDTH = 530, HEIGHT = 646;
+	private Clip clip = OnVolume.getInstance().clipSound("D:\\git\\SnakeGame_ver2\\src\\data\\sound.wav");
 
 	public MenuView(int width, int height) {
 //		Sound.playSound("D:\\git\\SnakeGame_ver2\\src\\data\\sound.wav");
+//		OnVolume.getInstance().clipSoundMenuView();
+//		OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\sound.wav");
+		clip.start();
+		
 		setTitle("Menu Game");
 		menuController = new MenuController(this);
 		setSize(new Dimension(width, height));
@@ -58,13 +68,20 @@ public class MenuView extends JFrame{
 		this(WIDTH, HEIGHT);
 	}
 	
+	public Clip getClip() {
+		return clip;
+	}
+
 	private class handler implements MouseListener{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\pop.wav");
+			clip.stop();
 			if(e.getSource() == panelContentMenu.getBtPlay()) {
 				menuController.newGame();
+				
 			}
 			
 			if(e.getSource() == panelContentMenu.getBtLevel()) {
@@ -106,6 +123,8 @@ public class MenuView extends JFrame{
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
+			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\ding.wav");
+			
 			if(e.getSource() == panelContentMenu.getBtPlay()) {
 				ImageIcon iconPlay = new ImageIcon("D:\\git\\GameSnake\\src\\data\\Play1.png");
 				panelContentMenu.getBtPlay().setIcon(iconPlay);

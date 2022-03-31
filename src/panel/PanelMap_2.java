@@ -12,7 +12,7 @@ public class PanelMap_2 extends ScreenGame{
 	public PanelMap_2(String playerDecoratorName) {
 		this.playerDecoratorName = playerDecoratorName;
 		resizeImage(iconBgMap2);
-		System.out.println("pannelMap_2(string)" + this.playerDecoratorName);
+//		System.out.println("pannelMap_2(string)" + this.playerDecoratorName);
 	}
 	
 	public PanelMap_2() {
@@ -25,7 +25,7 @@ public class PanelMap_2 extends ScreenGame{
 	@Override
 	protected void paintComponent(Graphics g) {
 		paintScreenGame(g);
-		System.out.println("in panel 2 panintComponent()" + this.playerDecoratorName);
+//		System.out.println("in panel 2 panintComponent()" + this.playerDecoratorName);
 		screenGameController.paintMap(g, this.playerDecoratorName, "paintmap2");
 	}
 	

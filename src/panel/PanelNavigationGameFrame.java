@@ -8,8 +8,14 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,6 +29,7 @@ import controller.NavigationController;
 import controller.ScreenGameController;
 import interfaceSnakeGame.VolumeState;
 import model.Snake;
+import volumeState.OffVolume;
 import volumeState.OnVolume;
 
 public class PanelNavigationGameFrame extends JPanel implements Runnable{
@@ -52,7 +59,8 @@ public class PanelNavigationGameFrame extends JPanel implements Runnable{
 
 		btVolume = new JButton();
 		btVolume.setPreferredSize(new Dimension(20, 20));
-		
+		btVolume.setIcon(resizeImage("D:\\git\\SnakeGame_ver2\\src\\data\\volume_on.png", 20, 20));
+
 		
 		navigationController = new NavigationController(this, this.screenGame);
 		
@@ -96,20 +104,12 @@ public class PanelNavigationGameFrame extends JPanel implements Runnable{
 		labelMaxAppleScore.setIcon( resizeImage("D:\\git\\SnakeGame_ver2\\src\\data\\cup.png", 20, 20));
 		
 	
-//		labelVolume = new JLabel("" + score);
-//		labelVolume.setFont(labelVolume.getFont().deriveFont(15.0f));
-//		labelVolume.setForeground(Color.WHITE);
-//		labelVolume.setIcon(new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\tao.png"));
-		
-
-		
 		
 //		btVolume.setBackground(new Color(0, 139, 69));
 		btVolume.setBorderPainted(false);
 		btVolume.setContentAreaFilled(false);
 		btVolume.setFocusable(false);
-		btVolume.setIcon(resizeImage("D:\\git\\SnakeGame_ver2\\src\\data\\volume.png", 20, 20));
-
+		
 		this.add(labelAppleScore);
 		this.add(labelEnergyScore);
 		this.add(labelMushroomScore);
@@ -227,23 +227,46 @@ public class PanelNavigationGameFrame extends JPanel implements Runnable{
 		return volumeState.doAction(this);
 	}
 	
+	public NavigationController getNavigationController() {
+		return navigationController;
+	}
+
+
 	@Override
 	public void run() {
 		
 		boolean running = true;
-		while (running) {
+//		int count = 1;
+//		
+//		OnVolume onVolume = OnVolume.getInstance();
+//		 
+//		Clip clip = onVolume.clipSound("D:\\git\\SnakeGame_ver2\\src\\data\\HallofFame.wav");
+		
+//		while (running) {
 			
-			try {
-				running = navigationController.handlerScore();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			repaint();
-		}
+			
+//			if (volumeState.doAction(this) && count == 1) {
+//				clip.start();
+//				count -= 1;
+//			}
+//			
+//			if (!volumeState.doAction(this) && count == 0) {
+//				clip.stop();
+//				count += 1;
+//			}
+			
+//			try {
+//				running = navigationController.handlerScore();
+//				
+//			} catch (ClassNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			repaint();
+//		}
 	}
 
 	
