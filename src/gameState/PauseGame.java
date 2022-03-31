@@ -1,7 +1,12 @@
 package gameState;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import abstractSnakeGame.ScreenGame;
 import interfaceSnakeGame.GameState;
@@ -23,10 +28,19 @@ public class PauseGame implements GameState{
 	@Override
 	public void paintState(Graphics g) {
 		// TODO Auto-generated method stub
-		g.setColor(Color.red);
-		g.fillRect(0, 0, 800, 800);
+		Graphics2D g2D = (Graphics2D) g;
+		
+		g2D.setStroke(new BasicStroke(5));
+		
+		
+			
+		g2D.setColor(Color.red);
+		g2D.setFont(new Font("Ink Free", Font.BOLD, 30));
+		g2D.drawString("CLICK SPACE TO PLAY!", 30, 200);
+		
 //		System.out.println("im in pause game");
 	}
+	
 
 	public static PauseGame getInstance() {
 		return instance;

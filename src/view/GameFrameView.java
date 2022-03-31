@@ -252,10 +252,10 @@ public class GameFrameView extends JFrame implements Runnable{
 					e.printStackTrace();
 				}
 			
-			repaint();
+			
 			
 			}	
-			
+			repaint();
 			
 		}
 		

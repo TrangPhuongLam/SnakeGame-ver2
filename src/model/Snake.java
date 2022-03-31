@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Arrays;
+import java.util.Currency;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -29,7 +31,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 	static final int GAME_UNIT = (screenWidth * screenHeight) / (unit_size * unit_size);
 	private int[] x = new int[GAME_UNIT];
 	private int[] y = new int[GAME_UNIT];
-	private int bodySnake = 3;
+	private int bodySnake = 10;
 	public boolean running = true;
 	private int appleEating = 0, mushroomEating = 0, energyEating = 0, swampEating = 0;
 	private int speed = 0;
@@ -37,6 +39,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 //	private HighScore highScore;
 	private GameState state;
 	private ImageIcon iconHeadUp, iconHeadDown, iconHeadLeft, iconHeadRight, iconBody, iconHead;
+	private ImageIcon iconTailUp, iconTailDown, iconTailLeft, iconTailRight, iconTail;
 	
 	public Snake(int screenWidth, int screenHeight) {
 		this.screenWidth = screenWidth;
@@ -50,8 +53,15 @@ public class Snake implements Eating, Collision, ShapePlayer{
 		iconHeadRight = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\Head_Right.png");
 		iconBody = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\body.png");
 		
-		
 		iconHead = iconHeadRight;
+		
+		iconTailUp = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\Tail_Up.png");
+		iconTailDown = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\Tail_Down.png");
+		iconTailLeft = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\Tail_Left.png");
+		iconTailRight = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\Tail_Right.png");
+		
+		iconTail = iconTailLeft;
+		
 		this.unit_size = iconHeadUp.getIconWidth();
 		
 		
@@ -59,20 +69,6 @@ public class Snake implements Eating, Collision, ShapePlayer{
 	}
 	
 	
-	
-	public void paintSnake(Graphics g) {
-		for(int i = 0; i< bodySnake;i++) {
-			if(i == 0) {
-				g.drawImage(iconHead.getImage(), x[i], y[i], 
-						unit_size, unit_size, null);
-				
-			}
-			else {
-				g.drawImage(iconBody.getImage(), x[i], y[i], 
-						unit_size, unit_size, null);
-			}			
-		}
-	}
 	
 	public static void setScreenWidth(int screenWidth) {
 		Snake.screenWidth = screenWidth;
@@ -181,11 +177,12 @@ public class Snake implements Eating, Collision, ShapePlayer{
 		}
 	}
 	
-	public void moving() {
+	public void moving() { 
 		//moving body
 		for(int i = bodySnake;i>0;i--) {
 			x[i] = x[i-1];
 			y[i] = y[i-1];
+			
 		}
 	
 		//moving head
@@ -203,38 +200,69 @@ public class Snake implements Eating, Collision, ShapePlayer{
 			x[0] = x[0] + unit_size;
 			break;
 		}
+		
+		
+		
+				
 	}
 	
 	public void returnSnake() {
-		//Right side
-		if (x[0] == screenWidth) {
-			for (int i = 0; i < bodySnake; i++) {
-				x[i] = 0 - (i * unit_size);
-				
+		for (int i = 0; i < bodySnake; i++) {
+			if (x[i] == screenWidth) {
+				x[i] = 0;
 			}
-		}else
-			//Left side
-			if (x[0] == (0 - unit_size)) {
-				for (int i = 0; i < bodySnake; i++) {
-					x[i] = screenWidth + ((i - 1) * unit_size);
-					
-				}
-		}else
-			//Bottom side
-			if (y[0] == screenHeight) {
-				for (int i = 0; i < bodySnake; i++) {
-					y[i] = 0 - (i * unit_size);
-					
-				}
-		}else
-			//Top side
-			if (y[0] == (0 - unit_size)) {
-				for (int i = 0; i < bodySnake; i++) {
-					y[i] = screenHeight + ((i - 1) * unit_size);
-					
-				}
 		}
 		
+		for (int i = 0; i < bodySnake; i++) {
+			if (x[i] == (0 - unit_size)) {
+				x[i] = screenWidth - unit_size;
+			}
+		}
+		
+		for (int i = 0; i < bodySnake; i++) {
+			if (y[i] == screenHeight) {
+				y[i] = 0;
+			}
+		}
+		
+		for (int i = 0; i < bodySnake; i++) {
+			if (y[i] == (0 - unit_size)) {
+				y[i] = screenWidth - unit_size;
+			}
+		}
+		
+		
+		
+//		//Right side
+//		if (x[0] == screenWidth) {
+//			for (int i = 0; i < bodySnake; i++) {
+//				x[i] = 0 - (i * unit_size);
+//				
+//			}
+//		}
+//		else
+//			//Left side
+//			if (x[0] == (0 - unit_size)) {
+//				for (int i = 0; i < bodySnake; i++) {
+//					x[i] = screenWidth + ((i - 1) * unit_size);
+//					
+//				}
+//		}else
+//			//Bottom side
+//			if (y[0] == screenHeight) {
+//				for (int i = 0; i < bodySnake; i++) {
+//					y[i] = 0 - (i * unit_size);
+//					
+//				}
+//		}else
+//			//Top side
+//			if (y[0] == (0 - unit_size)) {
+//				for (int i = 0; i < bodySnake; i++) {
+//					y[i] = screenHeight + ((i - 1) * unit_size);
+//					
+//				}
+//		}
+//		
 	}
 	
 	
@@ -265,6 +293,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 		@Override
 		public void keyTyped(KeyEvent e) {
 			// TODO Auto-generated method stub
+			
 			switch (e.getKeyChar() ){
 			case 'a':
 				if(direction != 'R') {
@@ -294,6 +323,26 @@ public class Snake implements Eating, Collision, ShapePlayer{
 			default:
 				break;
 			}
+			
+//			if (e.getKeyChar() == 'a' || e.getKeyChar() == 'w' || e.getKeyChar() == 's' || 
+//					e.getKeyChar() == 'd') {
+//				for (int i = 0; i < bodySnake; i++) {
+//					if (i == bodySnake -1) {
+//						if (iconHead.equals(iconHeadUp)) {
+//							iconTail = iconTailDown;
+//						}else 
+//							if(iconHead.equals(iconHeadDown)) {
+//							iconTail = iconTailUp;
+//						}else 
+//							if(iconHead.equals(iconHeadRight)) {
+//							iconTail = iconTailLeft;
+//						}else 
+//							if(iconHead.equals(iconHeadLeft)) {
+//							iconTail = iconTailRight;
+//						}
+//					}
+//				}
+//			}
 		}
 
 		@Override
@@ -328,6 +377,12 @@ public class Snake implements Eating, Collision, ShapePlayer{
 			default:
 				break;
 			}
+			
+//			if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_UP || 
+//					e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_LEFT) {
+//					
+//				
+//			}
 		}
 
 		@Override
@@ -341,12 +396,38 @@ public class Snake implements Eating, Collision, ShapePlayer{
 	@Override
 	public void paintSkin(Graphics g) {
 		// TODO Auto-generated method stub
+		if (x[bodySnake ] != x[bodySnake - 1] && y[bodySnake ] == y[bodySnake - 1] && 
+				x[bodySnake - 2] == x[bodySnake - 1] && y[bodySnake - 2] != y[bodySnake - 1] || 
+					
+				x[bodySnake] == x[bodySnake - 1] && y[bodySnake ] != y[bodySnake - 1] && 
+				x[bodySnake - 2] != x[bodySnake - 1] && y[bodySnake - 2] == y[bodySnake - 1]) {
+				
+				
+						if (iconHead.equals(iconHeadUp)) {
+						iconTail = iconTailDown;
+					}else 
+						if(iconHead.equals(iconHeadDown)) {
+						iconTail = iconTailUp;
+					}else 
+						if(iconHead.equals(iconHeadRight)) {
+						iconTail = iconTailLeft;
+					}else 
+						if(iconHead.equals(iconHeadLeft)) {
+						iconTail = iconTailRight;
+					
+				}
+				
+			}
+		
 		for(int i = 0; i< bodySnake;i++) {
 			if(i == 0) {
 				g.drawImage(iconHead.getImage(), x[i], y[i], 
 						unit_size, unit_size, null);
+			}else if (i == bodySnake - 1) {
+				g.drawImage(iconTail.getImage(), x[i], y[i], 
+						unit_size, unit_size, null);
 			}
-			else {
+			else if(i != 0 && i != bodySnake){
 				g.drawImage(iconBody.getImage(), x[i], y[i], 
 						unit_size, unit_size, null);
 			}	

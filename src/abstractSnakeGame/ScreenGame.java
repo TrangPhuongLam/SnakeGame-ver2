@@ -6,12 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import controller.ScreenGameController;
+import gameState.FalseOnlyState;
 import gameState.GameOver;
 import gameState.PauseGame;
 import gameState.StartGame;
@@ -49,7 +51,9 @@ public  abstract class ScreenGame extends JPanel implements Runnable{
 	public void paint(Graphics g) {
 		// TODO Auto-generated method stub
 		super.paint(g);
+		
 		state.paintState(g);
+		
 	}
 	
 	@Override
@@ -115,6 +119,17 @@ public  abstract class ScreenGame extends JPanel implements Runnable{
 //			
 //			}	
 //		}
+		
+//		boolean running = true;
+//		while(running) {
+//			if (!screenGameController.getSnake().getRunningPlayer()) {
+//				running = screenGameController.getSnake().getRunningPlayer();
+//			}
+//			
+//			repaint();
+//		}
+		
+		
 	}
 	
 	public static String getPlayerDecoratorName() {

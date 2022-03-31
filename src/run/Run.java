@@ -27,9 +27,9 @@ public class Run {
 	public static void main(String[] args) {
 //		LevelView levelView = new LevelView();
 //		HelpView helpView = new HelpView();
-		MenuView menuView = new MenuView();
+//		MenuView menuView = new MenuView();
 //		PlayerView playerView = new PlayerView();
-//		GameFrameView gameFrameView = new GameFrameView(new PanelMap_3());
+		GameFrameView gameFrameView = new GameFrameView(new PanelMap_3());
 		
 		
 //		ScreenGame map1 = new PanelMap_1("playerDecorator3");
