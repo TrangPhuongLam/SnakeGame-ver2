@@ -1,6 +1,7 @@
 package abstractSnakeGame;
 
 import java.awt.Graphics;
+
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import controller.ScreenGameController;
-import gameState.FalseOnlyState;
 import gameState.GameOver;
 import gameState.PauseGame;
 import gameState.StartGame;
