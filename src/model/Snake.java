@@ -23,6 +23,7 @@ import interfaceSnakeGame.Collision;
 import interfaceSnakeGame.Eating;
 import interfaceSnakeGame.ShapePlayer;
 import view.GameFrameView;
+import volumeState.OnVolume;
 
 public class Snake implements Eating, Collision, ShapePlayer{
 	private char direction = 'R';
@@ -97,6 +98,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 			bodySnake++;
 			appleEating++;
 			apple.randomFood();
+			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\beep-3.wav");
 		}
 	}
 
@@ -111,6 +113,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 			bodySnake--;
 			mushroomEating++;
 			mushroom.randomFood();
+			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\beep-3.wav");
 		}
 	}
 	
@@ -121,6 +124,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 			}
 			energyEating++;
 			energy.randomFood();
+			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\beep-3.wav");
 		}
 	}
 	
@@ -137,6 +141,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 			if((x[0] == x[i])&& (y[0] == y[i])) {
 				running = false;
 				System.out.println("Game Over!");
+				OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\beep-3.wav");
 			}
 		}
 		
@@ -163,6 +168,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 	public void collisionWall(Barrier wall) {
 		if((x[0] == wall.getxBarrier()) && (y[0] == wall.getyBarrier())) {
 			running = false;
+			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\beep-3.wav");
 			
 		}
 	}
@@ -174,6 +180,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 			}
 			swampEating++;
 			swamp.randomBarrier();
+			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\beep-3.wav");
 		}
 	}
 	
@@ -324,25 +331,6 @@ public class Snake implements Eating, Collision, ShapePlayer{
 				break;
 			}
 			
-//			if (e.getKeyChar() == 'a' || e.getKeyChar() == 'w' || e.getKeyChar() == 's' || 
-//					e.getKeyChar() == 'd') {
-//				for (int i = 0; i < bodySnake; i++) {
-//					if (i == bodySnake -1) {
-//						if (iconHead.equals(iconHeadUp)) {
-//							iconTail = iconTailDown;
-//						}else 
-//							if(iconHead.equals(iconHeadDown)) {
-//							iconTail = iconTailUp;
-//						}else 
-//							if(iconHead.equals(iconHeadRight)) {
-//							iconTail = iconTailLeft;
-//						}else 
-//							if(iconHead.equals(iconHeadLeft)) {
-//							iconTail = iconTailRight;
-//						}
-//					}
-//				}
-//			}
 		}
 
 		@Override
@@ -376,15 +364,8 @@ public class Snake implements Eating, Collision, ShapePlayer{
 
 			default:
 				break;
-			}
-			
-//			if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_UP || 
-//					e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_LEFT) {
-//					
-//				
-//			}
 		}
-
+		}
 		@Override
 		public void keyReleased(KeyEvent e) {
 			// TODO Auto-generated method stub
@@ -392,46 +373,64 @@ public class Snake implements Eating, Collision, ShapePlayer{
 		}
 		
 	}
+	
+	public void movingTail() {
+		//Check tail moving done a line
+		if (x[bodySnake ] != x[bodySnake - 1] && y[bodySnake ] == y[bodySnake - 1] && 
+			x[bodySnake - 2] == x[bodySnake - 1] && y[bodySnake - 2] != y[bodySnake - 1] || 
+					
+			x[bodySnake] == x[bodySnake - 1] && y[bodySnake ] != y[bodySnake - 1] && 
+			x[bodySnake - 2] != x[bodySnake - 1] && y[bodySnake - 2] == y[bodySnake - 1]) {
+			
+				
+				//Change direction tail
+				if (iconTail.equals(iconTailDown) && x[bodySnake - 1] < x[bodySnake - 2]) {
+					iconTail = iconTailLeft;
+				}else 
+					if (iconTail.equals(iconTailDown) && x[bodySnake - 1] > x[bodySnake - 2]) {
+					iconTail = iconTailRight;
+				}else 
+					if (iconTail.equals(iconTailUp) && x[bodySnake - 1] < x[bodySnake - 2]) {
+					iconTail = iconTailLeft;
+				}else 
+					if (iconTail.equals(iconTailUp) && x[bodySnake - 1] > x[bodySnake - 2]) {
+					iconTail = iconTailRight;
+				}else 
+					if (iconTail.equals(iconTailLeft) && y[bodySnake - 1] < y[bodySnake - 2]) {
+					iconTail = iconTailUp;
+				}else 
+					if (iconTail.equals(iconTailLeft) && y[bodySnake - 1] > y[bodySnake - 2]) {
+					iconTail = iconTailDown;
+				}else 
+					if (iconTail.equals(iconTailRight) && y[bodySnake - 1] < y[bodySnake - 2]) {
+					iconTail = iconTailUp;
+				}else 
+					if (iconTail.equals(iconTailRight) && y[bodySnake - 1] > y[bodySnake - 2]) {
+					iconTail = iconTailDown;
+				}
+				
+			}
+	}
 
 	@Override
 	public void paintSkin(Graphics g) {
 		// TODO Auto-generated method stub
-		if (x[bodySnake ] != x[bodySnake - 1] && y[bodySnake ] == y[bodySnake - 1] && 
-				x[bodySnake - 2] == x[bodySnake - 1] && y[bodySnake - 2] != y[bodySnake - 1] || 
-					
-				x[bodySnake] == x[bodySnake - 1] && y[bodySnake ] != y[bodySnake - 1] && 
-				x[bodySnake - 2] != x[bodySnake - 1] && y[bodySnake - 2] == y[bodySnake - 1]) {
-				
-				
-						if (iconHead.equals(iconHeadUp)) {
-						iconTail = iconTailDown;
-					}else 
-						if(iconHead.equals(iconHeadDown)) {
-						iconTail = iconTailUp;
-					}else 
-						if(iconHead.equals(iconHeadRight)) {
-						iconTail = iconTailLeft;
-					}else 
-						if(iconHead.equals(iconHeadLeft)) {
-						iconTail = iconTailRight;
-					
-				}
-				
-			}
 		
-		for(int i = 0; i< bodySnake;i++) {
-			if(i == 0) {
-				g.drawImage(iconHead.getImage(), x[i], y[i], 
-						unit_size, unit_size, null);
-			}else if (i == bodySnake - 1) {
-				g.drawImage(iconTail.getImage(), x[i], y[i], 
-						unit_size, unit_size, null);
+			movingTail();
+		
+			for(int i = 0; i< bodySnake;i++) {
+				if(i == 0) {
+					g.drawImage(iconHead.getImage(), x[i], y[i], 
+							unit_size, unit_size, null);
+				}else if (i == bodySnake - 1) {
+					g.drawImage(iconTail.getImage(), x[i], y[i], 
+							unit_size, unit_size, null);
+				}
+				else if(i != 0 && i != bodySnake){
+					g.drawImage(iconBody.getImage(), x[i], y[i], 
+							unit_size, unit_size, null);
+				}	
 			}
-			else if(i != 0 && i != bodySnake){
-				g.drawImage(iconBody.getImage(), x[i], y[i], 
-						unit_size, unit_size, null);
-			}	
-	}
 	}
 
 

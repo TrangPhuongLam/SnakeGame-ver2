@@ -36,7 +36,7 @@ public class PauseGame implements GameState{
 			
 		g2D.setColor(Color.red);
 		g2D.setFont(new Font("Ink Free", Font.BOLD, 30));
-		g2D.drawString("CLICK SPACE TO PLAY!", 30, 200);
+		g2D.drawString("PRESS SPACE TO PLAY!", 30, 200);
 		
 //		System.out.println("im in pause game");
 	}
