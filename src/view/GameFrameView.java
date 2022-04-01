@@ -330,9 +330,9 @@ public class GameFrameView extends JFrame implements Runnable{
 				}
 			
 			
-			
-			}	
 			repaint();
+			}	
+			
 			
 		}
 		

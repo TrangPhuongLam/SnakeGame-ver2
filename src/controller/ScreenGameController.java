@@ -3,6 +3,7 @@ package controller;
 import java.awt.Color;
 
 
+
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
@@ -20,7 +21,6 @@ import factory.PaintMapFactory;
 import interfaceSnakeGame.ShapePlayer;
 import model.Apple;
 import model.Energy;
-import model.GameState;
 import model.Mushroom;
 import model.Snake;
 import model.Swamp;

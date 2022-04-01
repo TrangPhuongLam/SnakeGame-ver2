@@ -38,7 +38,6 @@ public class Snake implements Eating, Collision, ShapePlayer{
 	private int speed = 0;
 	
 //	private HighScore highScore;
-	private GameState state;
 	private ImageIcon iconHeadUp, iconHeadDown, iconHeadLeft, iconHeadRight, iconBody, iconHead;
 	private ImageIcon iconTailUp, iconTailDown, iconTailLeft, iconTailRight, iconTail;
 	

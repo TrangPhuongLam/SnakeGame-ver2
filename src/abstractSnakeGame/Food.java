@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 import controller.ScreenGameController;
+import model.Animation;
 
 public abstract class Food {
 	protected int xFood, yFood, screenWidth = 4, screenHeight = 4, unit_size = 4;
@@ -14,6 +15,8 @@ public abstract class Food {
 	protected ImageIcon iconFoodResize;
 	protected Image imageFood, imageResize;
 	protected Random random;
+	protected Image image1, image2, image3, image4;
+	protected Animation animation;
 	
 	public Food(int screenWidth, int screenHeight, int unit_size) {
 		// TODO Auto-generated constructor stub
@@ -42,6 +45,7 @@ public abstract class Food {
  */
 	
 	public void paintFood(Graphics g) {
+		
 		g.drawImage(iconFoodResize.getImage(), xFood, yFood, 
 				iconFoodResize.getIconWidth(), iconFoodResize.getIconHeight(), null);
 	}
