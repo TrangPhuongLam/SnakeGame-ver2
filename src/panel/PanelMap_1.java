@@ -10,6 +10,7 @@ import abstractSnakeGame.ScreenGame;
 
 public class PanelMap_1 extends ScreenGame{
 	private ImageIcon iconBgMap1 = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\map_1.png");
+	private String mapName = "map1";
 	
 	public PanelMap_1(String playerDecoratorName) {
 		this.playerDecoratorName = playerDecoratorName;
@@ -37,6 +38,10 @@ public class PanelMap_1 extends ScreenGame{
 		paintScreenGame(g);
 //		System.out.println("in panel 1 panintComponent()" + this.playerDecoratorName);
 		screenGameController.paintMap(g, this.playerDecoratorName, "paintmap1");
+	}
+
+	public String getMapName() {
+		return mapName;
 	}
 	
 	

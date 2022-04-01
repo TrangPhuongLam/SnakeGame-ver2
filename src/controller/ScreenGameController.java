@@ -26,8 +26,11 @@ import model.Snake;
 import model.Swamp;
 import model.Wall;
 import observer.PaintMap_ver1;
+import panel.PanelContentPlayer;
 import panel.PanelMap_1;
+import panel.PanelReplayGame;
 import subject.PlayerChose;
+import view.ReplayView;
 
 
 public class ScreenGameController {
@@ -75,6 +78,12 @@ public class ScreenGameController {
 					paintMapObserver.getSwamp());
 			snake.returnSnake();
 		}
+	}
+	
+	public PanelReplayGame replayGame() {
+		PanelReplayGame panelReplayGame = new PanelReplayGame();
+		screenGame.add(panelReplayGame);
+		return panelReplayGame;
 	}
 	
 	public int speedSnake() {

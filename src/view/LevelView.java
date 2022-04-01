@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Dimension;
+
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
@@ -16,21 +17,25 @@ import javax.swing.SpringLayout;
 import controller.LevelController;
 import panel.PanelBgLevel;
 import panel.PanelContentLevel;
+import panel.PanelMap_1;
 import volumeState.OnVolume;
 
 
 public class LevelView extends JFrame{
 
-	static MenuView menuView;
 	private PanelBgLevel panelBgLevel;
-	private static PanelContentLevel panelContentLevel = new PanelContentLevel();
-	private LevelController levelController = new LevelController(this);
-	static  int width = panelContentLevel.getWIDTH() * 2, height = panelContentLevel.getHEIGHT() + 100;
+	private static PanelContentLevel panelContentLevel ;
+	private LevelController levelController;
+	static  int width = 300, height = 400;
 	private Clip clip = OnVolume.getInstance().clipSound("D:\\git\\SnakeGame_ver2\\src\\data\\sound.wav");
+	private String playerDecoratorName = "playerDecorator1";
 	
 	public LevelView(int width, int height) {
 		clip.start();
 
+		levelController = new LevelController(this);
+		
+		
 		setTitle("Level");
 		setSize(new Dimension(width, height));
 		setLocationRelativeTo(null);
@@ -45,6 +50,9 @@ public class LevelView extends JFrame{
 		setContentPane(panelBgLevel);
 
 		// ----------------- Panel Content Level -----------------
+		panelContentLevel = new PanelContentLevel();
+//		this.width = panelContentLevel.getWIDTH() * 2;
+//		this.height = panelContentLevel.getHEIGHT() + 100;
 		panelContentLevel.getBtMap1().addMouseListener(new handler());
 		panelContentLevel.getBtMap2().addMouseListener(new handler());
 		panelContentLevel.getBtMap3().addMouseListener(new handler());
@@ -65,14 +73,10 @@ public class LevelView extends JFrame{
 		this(width, height);
 	}
 	
-	public LevelView(LevelController levelController) {
+	public LevelView(String playerDecoratorName) {
 		this(width, height);
-		this.levelController = levelController;
-	}
-	
-	public LevelView(MenuView menuView) {
-		this(width, height);
-		this.menuView = menuView;
+		this.playerDecoratorName = playerDecoratorName;
+		this.levelController.setPlayerDecoratorName(this.playerDecoratorName);
 	}
 	
 	private class handler implements MouseListener{
@@ -82,25 +86,19 @@ public class LevelView extends JFrame{
 			// TODO Auto-generated method stub
 			clip.stop();
 			if(e.getSource() == panelContentLevel.getBtMap1()) {
-				levelController.Map1();
-				dispose();
-				
+				levelController.map1();
 			}
 			
 			if(e.getSource() == panelContentLevel.getBtMap2()) {
-				levelController.Map2();
-				dispose();
+				levelController.map2();
 			}
 			
 			if(e.getSource() == panelContentLevel.getBtMap3()) {
-				levelController.Map3();
-				dispose();
+				levelController.map3();
 			}
 			
 			if(e.getSource() == panelContentLevel.getBtBack()) {
-				menuView = new MenuView();
-//				menuView.setVisible(true);
-				dispose();
+				levelController.backMenuView();
 			}
 		}
 

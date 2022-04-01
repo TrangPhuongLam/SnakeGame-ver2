@@ -8,6 +8,8 @@ import abstractSnakeGame.ScreenGame;
 
 public class PanelMap_3 extends ScreenGame{
 	private ImageIcon iconBgMap3 =  new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\map_3.png");
+	private static String playerDecorator = "playerDecorator1";
+	private String mapName = "map3";
 	
 	public PanelMap_3(String playerDecoratorName) {
 		this.playerDecoratorName = playerDecoratorName;
@@ -21,12 +23,15 @@ public class PanelMap_3 extends ScreenGame{
 	}
 	
 	
-
 	@Override
 	protected void paintComponent(Graphics g) {
 		paintScreenGame(g);
 //		System.out.println("in panel 3 panintComponent()" + this.playerDecoratorName);
 		screenGameController.paintMap(g, this.playerDecoratorName, "paintmap3");
+	}
+
+	public String getMapName() {
+		return mapName;
 	}
 	
 	

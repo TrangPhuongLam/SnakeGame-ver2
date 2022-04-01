@@ -83,6 +83,7 @@ public class HelpView extends JFrame{
 				ImageIcon iconBack = new ImageIcon("D:\\git\\GameSnake\\src\\data\\back.png");
 				panelContentHelp.getBtBack().setIcon(iconBack);
 				panelContentHelp.getBtBack().setPreferredSize(new Dimension(105, 30));
+				dispose();
 			}
 		}
 		

@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -20,19 +21,24 @@ import javax.swing.SpringLayout;
 import abstractSnakeGame.ScreenGame;
 import controller.GameFrameController;
 import gameState.GameOver;
+import gameState.PauseGame;
+import gameState.StartGame;
 import interfaceSnakeGame.VolumeState;
 import panel.PanelMap_1;
 import panel.PanelMap_2;
+import panel.PanelMap_3;
 import panel.PanelNavigationGameFrame;
+import panel.PanelReplayGame;
 import volumeState.OffVolume;
 import volumeState.OnVolume;
 
 public class GameFrameView extends JFrame implements Runnable{
-	Thread thread;
-	PanelNavigationGameFrame panelNavigationGameFrame;
-	GameFrameController gameFrameController;
+	private Thread thread;
+	private PanelNavigationGameFrame panelNavigationGameFrame;
+	private GameFrameController gameFrameController;
 	public static ScreenGame screenGame ;
-	static  int width = 400, height = 400;//w 413, h 472
+	private static  int width = 400, height = 400;//w 413, h 472
+	
 
 	public GameFrameView(ScreenGame map) {
 		// TODO Auto-generated constructor stub
@@ -104,6 +110,7 @@ public class GameFrameView extends JFrame implements Runnable{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			//Panel navigation
 			if (e.getSource() == panelNavigationGameFrame.getBtVolume()) {
 				if (panelNavigationGameFrame.getVolumeState().equals(OnVolume.getInstance())) {
 					panelNavigationGameFrame.setVolumeState(OffVolume.getInstance());
@@ -116,8 +123,31 @@ public class GameFrameView extends JFrame implements Runnable{
 					panelNavigationGameFrame.getBtVolume().setIcon(panelNavigationGameFrame.resizeImage(
 							"D:\\git\\SnakeGame_ver2\\src\\data\\volume_on.png", 30, 30));
 				}
-				
 			}
+			
+			//Panel replay game
+			if(e.getSource() == screenGame.getPanelReplayGame().getBtReplay()) {
+				
+				if (screenGame.getMapName().equalsIgnoreCase("map3")) {
+					GameFrameView gameFrameView = new GameFrameView(new PanelMap_3(screenGame.getPlayerDecoratorName()));
+					dispose(); 
+				}else
+					if (screenGame.getMapName().equalsIgnoreCase("map2")) {
+					GameFrameView gameFrameView = new GameFrameView(new PanelMap_2(screenGame.getPlayerDecoratorName()));
+					dispose();
+				}else
+					if (screenGame.getMapName().equalsIgnoreCase("map1")) {
+					GameFrameView gameFrameView = new GameFrameView(new PanelMap_1(screenGame.getPlayerDecoratorName()));
+					dispose();
+				}
+				dispose();
+			}
+			
+			if(e.getSource() == screenGame.getPanelReplayGame().getBtHome()) {
+				MenuView menuView = new MenuView();
+				dispose();
+			}
+			
 		}
 
 		@Override
@@ -135,6 +165,7 @@ public class GameFrameView extends JFrame implements Runnable{
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
+			//Panel navigation
 			if (e.getSource() == panelNavigationGameFrame.getBtVolume()) {
 				if (panelNavigationGameFrame.getVolumeState().equals(OnVolume.getInstance())) {
 					panelNavigationGameFrame.getBtVolume().setIcon(
@@ -152,11 +183,27 @@ public class GameFrameView extends JFrame implements Runnable{
 				
 				
 			}
+			
+			//Panel replay game
+			
+			if(e.getSource() == screenGame.getPanelReplayGame().getBtReplay()) {
+				PanelReplayGame panelReplayGame = screenGame.getPanelReplayGame();
+				panelReplayGame.getBtReplay().setIcon(panelReplayGame.resizeImage(
+						"D:\\git\\SnakeGame_ver2\\src\\data\\replay.png", 75, 75));
+				panelReplayGame.getBtReplay().setPreferredSize(new Dimension(75, 75));
+			}
+			
+			if(e.getSource() == screenGame.getPanelReplayGame().getBtHome()) {
+				PanelReplayGame panelReplayGame = screenGame.getPanelReplayGame();
+				panelReplayGame.getBtHome().setIcon(panelReplayGame.resizeImage(
+						"D:\\git\\SnakeGame_ver2\\src\\data\\home.png", 75, 75));
+			}
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
+			//Panel navigation
 			if (e.getSource() == panelNavigationGameFrame.getBtVolume()) {
 				if (panelNavigationGameFrame.getVolumeState().equals(OnVolume.getInstance())) {
 					panelNavigationGameFrame.getBtVolume().setIcon(
@@ -172,6 +219,21 @@ public class GameFrameView extends JFrame implements Runnable{
 						
 				}
 			}
+			
+			//Panel replay game
+			if(e.getSource() == screenGame.getPanelReplayGame().getBtReplay()) {
+				PanelReplayGame panelReplayGame = screenGame.getPanelReplayGame();
+				panelReplayGame.getBtReplay().setIcon(panelReplayGame.resizeImage(
+						"D:\\git\\SnakeGame_ver2\\src\\data\\replay.png", 60, 60));
+				panelReplayGame.getBtReplay().setPreferredSize(new Dimension(60, 60));
+			}
+			
+			if(e.getSource() == screenGame.getPanelReplayGame().getBtHome()) {
+				PanelReplayGame panelReplayGame = screenGame.getPanelReplayGame();
+				panelReplayGame.getBtHome().setIcon(panelReplayGame.resizeImage(
+						"D:\\git\\SnakeGame_ver2\\src\\data\\home.png", 60, 60));
+			}
+			
 		}
 		
 	}
@@ -180,8 +242,18 @@ public class GameFrameView extends JFrame implements Runnable{
 		@Override
 		public void keyPressed(KeyEvent e) {
 			// TODO Auto-generated method stub
-//		gameFrameController.handlerKeyPress(e);
 			gameFrameController.getKeyPressSnake(e);
+			
+//			//Press space
+//			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+//				
+//				if (screenGame.getState().equals(StartGame.getInstance())) {
+//					screenGame.setState(PauseGame.getInstance());
+//				}else 
+//					 if (screenGame.getState().equals(PauseGame.getInstance())) {
+//					screenGame.setState(StartGame.getInstance());
+//				}
+//			}
 			
 		}
 
@@ -243,6 +315,11 @@ public class GameFrameView extends JFrame implements Runnable{
 					screenGame.setState(GameOver.getInstance());
 					running = screenGame.getState().doAction(screenGame);
 					clip.stop();
+					
+					//Appear panelReplayGame
+					screenGame.setPanelReplayGame(screenGame.getScreenGameController().replayGame());
+					screenGame.getPanelReplayGame().getBtReplay().addMouseListener(new HandlerMouse());
+					screenGame.getPanelReplayGame().getBtHome().addMouseListener(new HandlerMouse());
 				}
 				
 				try {

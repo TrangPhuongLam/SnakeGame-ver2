@@ -55,7 +55,7 @@ public class MenuController implements Controller{
 	@Override
 	public void levelGame() {
 		LevelView levelView = new LevelView();
-		
+		menuView.dispose();
 
 	}
 
@@ -63,14 +63,14 @@ public class MenuController implements Controller{
 	public void helpGame() {
 		// TODO Auto-generated method stub
 		HelpView helpView = new HelpView();
-		
+		menuView.dispose();
 	}
 
 	@Override
 	public void playerGame() {
 		// TODO Auto-generated method stub
 		PlayerView playerView = new PlayerView();
-		
+		menuView.dispose();
 	}
 
 }

@@ -12,15 +12,18 @@ import panel.PanelMap_1;
 import panel.PanelMap_3;
 import view.GameFrameView;
 import view.LevelView;
+import view.MenuView;
 import view.PlayerView;
 
 public class PlayerController {
+	private PlayerView playerView;
 	private String playerDecoratorName = "playerDecorator1";
 	private LevelController levelController;
 	private LevelView levelView;
 	
-	public PlayerController() {
+	public PlayerController(PlayerView playerView) {
 		// TODO Auto-generated constructor stub
+		this.playerView = playerView;
 	}
 	
 	public String getPlayerDecorator_1() {
@@ -37,18 +40,26 @@ public class PlayerController {
 	}
 
 	public void chosePlayerDecorator_1() {
-		levelController = new LevelController(getPlayerDecorator_1());
-		levelView = new LevelView(levelController);
+		
+		levelView =  new LevelView(getPlayerDecorator_1());
+		playerView.dispose();
 	}
 
 	public void chosePlayerDecorator_2() {
-		levelController = new LevelController(getPlayerDecorator_2());
-		levelView = new LevelView(levelController);
+		
+		levelView =  new LevelView(getPlayerDecorator_2());
+		playerView.dispose();
 	}
 	
 	public void chosePlayerDecorator_3() {
-		levelController = new LevelController(getPlayerDecorator_3());
-		levelView = new LevelView(levelController);
+		
+		levelView =  new LevelView(getPlayerDecorator_3());
+		playerView.dispose();
+	}
+	
+	public void backMenuView() {
+		MenuView menuView = new MenuView();
+		playerView.dispose();
 	}
 	
 	

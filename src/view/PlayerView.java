@@ -22,16 +22,16 @@ import volumeState.OnVolume;
 public class PlayerView extends JFrame{
 	static MenuView menuView;
 	private PanelBgPlayer panelBgPlayer;
-	private static PanelContentPlayer panelContentPlayer = new PanelContentPlayer();
+	private static PanelContentPlayer panelContentPlayer ;
 	private ScreenGameController screenGameController;
 	private PlayerController playerController;
-	static  int width = panelContentPlayer.getWIDTH() + 200, height = panelContentPlayer.getHEIGHT() + 100;
+	static  int width = 500, height = 600;
 	private Clip clip = OnVolume.getInstance().clipSound("D:\\git\\SnakeGame_ver2\\src\\data\\sound.wav");
 	
 	public PlayerView(int width, int height) {
 		// TODO Auto-generated constructor stub
 		clip.start();
-		playerController = new PlayerController();
+		playerController = new PlayerController(this);
 		setTitle("Player");
 		setSize(new Dimension(width, height));
 		setLocationRelativeTo(null);
@@ -46,7 +46,7 @@ public class PlayerView extends JFrame{
 		setContentPane(panelBgPlayer);
 
 		// ----------------- Panel Content Player -----------------
-		
+		panelContentPlayer = new PanelContentPlayer();
 		panelContentPlayer.getBtPlayer1().addMouseListener(new handler());
 		panelContentPlayer.getBtPlayer2().addMouseListener(new handler());
 		panelContentPlayer.getBtPlayer3().addMouseListener(new handler());
@@ -75,24 +75,19 @@ public class PlayerView extends JFrame{
 			clip.stop();
 			if(e.getSource() == panelContentPlayer.getBtPlayer1()) {
 				playerController.chosePlayerDecorator_1();
-				dispose();
 				
 			}
 			
 			if(e.getSource() == panelContentPlayer.getBtPlayer2()) {
 				playerController.chosePlayerDecorator_2();
-				dispose();
 			}
 			
 			if(e.getSource() == panelContentPlayer.getBtPlayer3()) {
 				playerController.chosePlayerDecorator_3();
-				dispose();
 			}
 			
 			if(e.getSource() == panelContentPlayer.getBtBack()) {
-				menuView = new MenuView();
-//				menuView.setVisible(true);
-				dispose();
+				playerController.backMenuView();
 			}
 		}
 

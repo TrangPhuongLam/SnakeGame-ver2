@@ -19,24 +19,24 @@ import gameState.PauseGame;
 import gameState.StartGame;
 import interfaceSnakeGame.GameState;
 import model.Snake;
+import panel.PanelReplayGame;
 
-public  abstract class ScreenGame extends JPanel implements Runnable{
+public  abstract class ScreenGame extends JPanel {
 	protected Thread thread;
 	protected ScreenGameController screenGameController;
 	protected ImageIcon iconBgResize;
 	protected Image imageBgScreenGame, imageResize;
 	public static int width = 400, height = 400;
 	protected static String playerDecoratorName = "playerDecorator1";
-	
+	protected String mapName = "map1";
+	protected PanelReplayGame panelReplayGame = new PanelReplayGame();
 	protected GameState state = PauseGame.getInstance();
+	
 	
 	public ScreenGame(String playerDecoratorName) {
 		System.out.println("in screengame(string) input:" + playerDecoratorName);
 		this.playerDecoratorName = playerDecoratorName;
 		screenGameController = new ScreenGameController(this);
-		
-		thread = new Thread(this);
-		thread.start();
 		
 		System.out.println("in screengame(string)" + this.playerDecoratorName);
 		
@@ -74,63 +74,19 @@ public  abstract class ScreenGame extends JPanel implements Runnable{
 		ScreenGame.height = height;
 	}
 	
-	
+	public String getMapName() {
+		return mapName;
+	}
+
+
 	public void paintScreenGame(Graphics g){
 //		System.out.println("Im in paint screen game");
 		g.drawImage(iconBgResize.getImage(), 0, 0, width, height, null);
 	}
 	
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-
-//		boolean running = true;
-//		while(running) {
-//		screenGameController.startGame();
-//		running = screenGameController.getSnake().getRunningPlayer();
-//		repaint();
-//			try {
-//				thread.sleep(350 - screenGameController.speedSnake());
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		
-//	}
-//		boolean running = true;
-//		while(running) {
-			
-//			if (state.doAction(this)) {
-//				
-//		
-//			screenGameController.startGame();
-//			
-//			if (!screenGameController.getSnake().getRunningPlayer()) {
-//				state = GameOver.getInstance();
-//				running = state.doAction(this);
-//			}
-//			repaint();
-//			try {
-//				thread.sleep(350 - screenGameController.speedSnake());
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//			}	
-//		}
-		
-//		boolean running = true;
-//		while(running) {
-//			if (!screenGameController.getSnake().getRunningPlayer()) {
-//				running = screenGameController.getSnake().getRunningPlayer();
-//			}
-//			
-//			repaint();
-//		}
-		
-		
-	}
+	
+	
+	
 	
 	public static String getPlayerDecoratorName() {
 		return playerDecoratorName;
@@ -151,6 +107,17 @@ public  abstract class ScreenGame extends JPanel implements Runnable{
 	public void setState(GameState state) {
 		this.state = state;
 	}
+	
+	public PanelReplayGame getPanelReplayGame() {
+		return panelReplayGame;
+	}
+
+	public void setPanelReplayGame(PanelReplayGame panelReplayGame) {
+		this.panelReplayGame = panelReplayGame;
+	}
+
+	
+	
 
 	public boolean doAction(ScreenGame screenGame) {
 		

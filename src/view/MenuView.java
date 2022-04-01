@@ -24,9 +24,6 @@ import volumeState.OnVolume;
 
 
 public class MenuView extends JFrame{
-	static LevelView levelView;
-	static HelpView helpView;
-	static PlayerView playerView;
 	public MenuController menuController;
 	private PanelBgMenu panelBgMenu;
 	private PanelContentMenu panelContentMenu;
@@ -34,9 +31,6 @@ public class MenuView extends JFrame{
 	private Clip clip = OnVolume.getInstance().clipSound("D:\\git\\SnakeGame_ver2\\src\\data\\sound.wav");
 
 	public MenuView(int width, int height) {
-//		Sound.playSound("D:\\git\\SnakeGame_ver2\\src\\data\\sound.wav");
-//		OnVolume.getInstance().clipSoundMenuView();
-//		OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\sound.wav");
 		clip.start();
 		
 		setTitle("Menu Game");
@@ -86,17 +80,14 @@ public class MenuView extends JFrame{
 			
 			if(e.getSource() == panelContentMenu.getBtLevel()) {
 				menuController.levelGame();
-				dispose();
 			}
 			
 			if(e.getSource() == panelContentMenu.getBtPlayer()) {
 				menuController.playerGame();
-				dispose();
 			}
 			
 			if(e.getSource() == panelContentMenu.getBtHelp()) {
 				menuController.helpGame();
-				dispose();
 			}
 			
 			if(e.getSource() == panelContentMenu.getBtScore()) {

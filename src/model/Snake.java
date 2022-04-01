@@ -112,6 +112,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 		if((x[0] == mushroom.getxFood()) && (y[0] == mushroom.getyFood())) {
 			bodySnake--;
 			mushroomEating++;
+			appleEating--;
 			mushroom.randomFood();
 			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\beep-3.wav");
 		}
@@ -135,32 +136,21 @@ public class Snake implements Eating, Collision, ShapePlayer{
 
 	public void collisionBody() {
 		//checks if head collides with body
-		for(int i = bodySnake;i>0;i--) {
-			//check head move right to body 
+		for(int i = bodySnake - 1;i>0;i--) {
 			
 			if((x[0] == x[i])&& (y[0] == y[i])) {
+			//Head snake appear
+				x[0] = x[1];
+				y[0] = y[1];
+				x[1] = x[2];
+				y[1] = y[2];
+				
 				running = false;
 				System.out.println("Game Over!");
 				OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\beep-3.wav");
 			}
 		}
 		
-//		//check if head touches left border
-//		if(x[0] < 0) {
-//			running = false;
-//		}
-//		//check if head touches right border
-//		if(x[0] > screenWidth) {
-//			running = false;
-//		}
-//		//check if head touches top border
-//		if(y[0] < 0) {
-//			running = false;
-//		}
-//		//check if head touches bottom border
-//		if(y[0] > screenHeight) {
-//			running = false;
-//		}
 		
 		
 	}
@@ -416,21 +406,21 @@ public class Snake implements Eating, Collision, ShapePlayer{
 	public void paintSkin(Graphics g) {
 		// TODO Auto-generated method stub
 		
-			movingTail();
-		
-			for(int i = 0; i< bodySnake;i++) {
-				if(i == 0) {
-					g.drawImage(iconHead.getImage(), x[i], y[i], 
-							unit_size, unit_size, null);
-				}else if (i == bodySnake - 1) {
-					g.drawImage(iconTail.getImage(), x[i], y[i], 
-							unit_size, unit_size, null);
-				}
-				else if(i != 0 && i != bodySnake){
-					g.drawImage(iconBody.getImage(), x[i], y[i], 
-							unit_size, unit_size, null);
-				}	
+		movingTail();
+	
+		for(int i = 0; i< bodySnake;i++) {
+			if(i == 0) {
+				g.drawImage(iconHead.getImage(), x[i], y[i], 
+						unit_size, unit_size, null);
+			}else if (i == bodySnake - 1) {
+				g.drawImage(iconTail.getImage(), x[i], y[i], 
+						unit_size, unit_size, null);
 			}
+			else if(i != 0 && i != bodySnake){
+				g.drawImage(iconBody.getImage(), x[i], y[i], 
+						unit_size, unit_size, null);
+			}	
+		}
 	}
 
 

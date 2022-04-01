@@ -22,15 +22,20 @@ import view.HelpView;
 import view.LevelView;
 import view.MenuView;
 import view.PlayerView;
+import view.ReplayView;
 
 public class Run {
 	public static void main(String[] args) {
 //		LevelView levelView = new LevelView();
 //		HelpView helpView = new HelpView();
-//		MenuView menuView = new MenuView();
+		MenuView menuView = new MenuView();
 //		PlayerView playerView = new PlayerView();
-		GameFrameView gameFrameView = new GameFrameView(new PanelMap_3());
 		
+		
+//		GameFrameView gameFrameView = new GameFrameView(new PanelMap_3());
+//		GameFrameView gameFrameView = new GameFrameView(new PanelMap_3("playerDecorator3"));
+		
+//		ReplayView replayView = new ReplayView();
 		
 //		ScreenGame map1 = new PanelMap_1("playerDecorator3");
 //		GameFrameView gameFrameView = new GameFrameView(map1);

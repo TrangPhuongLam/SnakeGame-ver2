@@ -6,42 +6,55 @@ import panel.PanelMap_2;
 import panel.PanelMap_3;
 import view.GameFrameView;
 import view.LevelView;
+import view.MenuView;
 
 public class LevelController {
-	public LevelView levelView;
-	public GameFrameView gameFrameMap1, gameFrameMap2, gameFrameMap3;
-	public ScreenGame map1, map2, map3;
+	public static LevelView levelView;
+	public GameFrameView gameFrameMap1, gameFrameMap2, gameFrameMap3, gameFrame;
+	public ScreenGame map1, map2, map3, screenGame;
 	public static String playerDecoratorName = "playerDecoratorName1";
 
 	public LevelController(LevelView levelView) {
-		super();
 		this.levelView = levelView;
 		
 	}
 	
-	public LevelController(String playerDecoratorName) {
+	public void map1() {
 		
-		this.map1.setPlayerDecoratorName(playerDecoratorName);
-		this.map2.setPlayerDecoratorName(playerDecoratorName);
-		this.map3.setPlayerDecoratorName(playerDecoratorName);
+		screenGame = new PanelMap_1();
+		screenGame.setPlayerDecoratorName(this.playerDecoratorName);
+		gameFrame = new GameFrameView(screenGame);
+		levelView.dispose();
 	}
 	
-	public LevelController() {
-		this(playerDecoratorName);
+	public void map2() {
+		
+		screenGame = new PanelMap_2();
+		screenGame.setPlayerDecoratorName(this.playerDecoratorName);
+		gameFrame = new GameFrameView(screenGame);
+		levelView.dispose();
 	}
 	
-	public void Map1() {
-		map1 = new PanelMap_1();
-		gameFrameMap1 = new GameFrameView(map1);
+	public void map3() {
+		
+		screenGame = new PanelMap_3();
+		screenGame.setPlayerDecoratorName(this.playerDecoratorName);
+		gameFrame = new GameFrameView(screenGame);
+		levelView.dispose();
 	}
 	
-	public void Map2() {
-		map2 = new PanelMap_2();
-		gameFrameMap2 = new GameFrameView(map2);
+	public void backMenuView() {
+		MenuView menuView = new MenuView();
+		levelView.dispose();
+	}
+
+	public static String getPlayerDecoratorName() {
+		return playerDecoratorName;
+	}
+
+	public static void setPlayerDecoratorName(String playerDecoratorName) {
+		LevelController.playerDecoratorName = playerDecoratorName;
 	}
 	
-	public void Map3() {
-		map3 = new PanelMap_3();
-		gameFrameMap3 = new GameFrameView(map3);
-	}
+	
 }
