@@ -32,7 +32,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 	static final int GAME_UNIT = (screenWidth * screenHeight) / (unit_size * unit_size);
 	private int[] x = new int[GAME_UNIT];
 	private int[] y = new int[GAME_UNIT];
-	private int bodySnake = 10;
+	private int bodySnake = 4;
 	public boolean running = true;
 	private int appleEating = 0, mushroomEating = 0, energyEating = 0, swampEating = 0;
 	private int speed = 0;
@@ -97,7 +97,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 			bodySnake++;
 			appleEating++;
 			apple.randomFood();
-			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\beep-3.wav");
+			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\eatApple.wav");
 		}
 	}
 
@@ -113,7 +113,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 			mushroomEating++;
 			appleEating--;
 			mushroom.randomFood();
-			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\beep-3.wav");
+			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\eatMushroom.wav");
 		}
 	}
 	
@@ -137,7 +137,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 		//checks if head collides with body
 		for(int i = bodySnake - 1;i>0;i--) {
 			
-			if((x[0] == x[i])&& (y[0] == y[i])) {
+			if((x[0] == x[i]) && (y[0] == y[i])) {
 			//Head snake appear
 				x[0] = x[1];
 				y[0] = y[1];
@@ -146,7 +146,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 				
 				running = false;
 				System.out.println("Game Over!");
-				OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\beep-3.wav");
+				OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\boom.wav");
 			}
 		}
 		
@@ -157,7 +157,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 	public void collisionWall(Barrier wall) {
 		if((x[0] == wall.getxBarrier()) && (y[0] == wall.getyBarrier())) {
 			running = false;
-			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\beep-3.wav");
+			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\boom.wav");
 			
 		}
 	}
@@ -169,7 +169,7 @@ public class Snake implements Eating, Collision, ShapePlayer{
 			}
 			swampEating++;
 			swamp.randomBarrier();
-			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\beep-3.wav");
+			OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\eatMushroom.wav");
 		}
 	}
 	

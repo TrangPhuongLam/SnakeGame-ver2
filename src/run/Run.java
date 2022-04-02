@@ -28,7 +28,9 @@ public class Run {
 	public static void main(String[] args) {
 //		LevelView levelView = new LevelView();
 //		HelpView helpView = new HelpView();
+		
 		MenuView menuView = new MenuView();
+		
 //		PlayerView playerView = new PlayerView();
 		
 		

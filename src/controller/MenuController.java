@@ -1,9 +1,12 @@
 package controller;
 
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
 
 import abstractSnakeGame.ScreenGame;
 import interfaceSnakeGame.Controller;
+import model.HighScore;
 import panel.PanelMap_1;
 import view.GameFrameView;
 import view.HelpView;
@@ -36,17 +39,17 @@ public class MenuController implements Controller{
 
 	@Override
 	public void scoreGame() {
-		String str = "Best Score:" + "\n";
 
-//		if (HighScore.getInstance().get().size() <= 3) {
-//			for (int i = 0; i < HighScore.getInstance().get().size(); i++) {
-//				str += "no" + "." + (i + 1) + "    " + HighScore.getInstance().get().get(i) + "\n";
-//			}
-//		} else {
-//			for (int i = 0; i < 3; i++) {
-//				str += "no" + "." + (i + 1) + "    " + HighScore.getInstance().get().get(i) + "\n";
-//			}
-//		}
+		HighScore highScore = new HighScore();
+		int score = 0;
+		try {
+			 score = highScore.readHightScore();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String str = "Best Score: " + score;
 		JOptionPane.showConfirmDialog(menuView, str, "High Score", JOptionPane.DEFAULT_OPTION,
 				JOptionPane.DEFAULT_OPTION);
 
