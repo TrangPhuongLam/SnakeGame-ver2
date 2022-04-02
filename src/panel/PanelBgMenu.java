@@ -10,7 +10,7 @@ public class PanelBgMenu extends JPanel{
 	
 	public PanelBgMenu() {
 		// TODO Auto-generated constructor stub
-		iconBgMenu = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\screenBG.png"); 
+		iconBgMenu = new ImageIcon("D:\\git\\SnakeGame_ver2\\src\\data\\Background_desktop.png"); 
 	}
 	
 	@Override
