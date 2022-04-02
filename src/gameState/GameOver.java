@@ -22,7 +22,7 @@ public class GameOver implements GameState{
 	@Override
 	public boolean doAction(ScreenGame screenGame) {
 		// TODO Auto-generated method stub
-		OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\Tieng-cuoi-troll-25s.wav");
+		OnVolume.getInstance().sound("D:\\git\\SnakeGame_ver2\\src\\data\\Tieng-cuoi-troll.wav");
 		screenGame.setState(this);
 		return false;
 	}

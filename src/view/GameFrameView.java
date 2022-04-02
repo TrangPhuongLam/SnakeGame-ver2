@@ -281,7 +281,7 @@ public class GameFrameView extends JFrame implements Runnable{
 		
 		OnVolume onVolume = OnVolume.getInstance();
 		 
-		Clip clip = onVolume.clipSound("D:\\git\\SnakeGame_ver2\\src\\data\\HallofFame.wav");
+		Clip clip = onVolume.clipSound("D:\\git\\SnakeGame_ver2\\src\\data\\Silent-Partner-Dog-Park.wav");
 		
 		while(running) {
 			//On Volume
