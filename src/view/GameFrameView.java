@@ -47,9 +47,11 @@ public class GameFrameView extends JFrame implements Runnable{
 		this.screenGame = map;
 		System.out.println("im in game frame");
 		gameFrameController = new GameFrameController(this);
+		
 		// labelScore = new JLabel(score.getScore()+"");
 		setTitle("Game Snake");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(new Dimension(width, height));
 		
 		setLocationRelativeTo(null);
 		setResizable(false);
